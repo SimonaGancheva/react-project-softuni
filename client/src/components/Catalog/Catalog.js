@@ -1,4 +1,8 @@
-export const Catalog = () => {
+import { EventCard } from "../EventCard/EventCard"
+
+export const Catalog = ({
+    events
+}) => {
     return (
         <section className="explore-section section-padding" id="section_2">
                 <div className="container">
@@ -42,61 +46,11 @@ export const Catalog = () => {
 
                         <div className="col-12">
                             <div className="tab-content" id="myTabContent">
-                                <div className="tab-pane fade show active" id="design-tab-pane" role="tabpanel" aria-labelledby="design-tab" tabIndex="0">
+                                <div className="tab-pane fade" id="design-tab-pane" role="tabpanel" aria-labelledby="design-tab" tabIndex="0">
                                     <div className="row">
-                                        <div className="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0">
-                                            <div className="custom-block bg-white shadow-lg">
-                                                <a href="topics-detail.html">
-                                                    <div className="d-flex">
-                                                        <div>
-                                                            <h5 className="mb-2">Web Design</h5>
+                                        {events.map(x => <EventCard key={x._id} {...x} />)}
 
-                                                            <p className="mb-0">Topic Listing Template based on Bootstrap 5</p>
-                                                        </div>
-
-                                                        <span className="badge bg-design rounded-pill ms-auto">14</span>
-                                                    </div>
-
-                                                    <img src="images/topics/undraw_Remote_design_team_re_urdx.png" className="custom-block-image img-fluid" alt="" />
-                                                </a>
-                                            </div>
-                                        </div>
-
-                                        <div className="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0">
-                                            <div className="custom-block bg-white shadow-lg">
-                                                <a href="topics-detail.html">
-                                                    <div className="d-flex">
-                                                        <div>
-                                                            <h5 className="mb-2">Graphic</h5>
-
-                                                                <p className="mb-0">Lorem Ipsum dolor sit amet consectetur</p>
-                                                        </div>
-
-                                                        <span className="badge bg-design rounded-pill ms-auto">75</span>
-                                                    </div>
-
-                                                    <img src="images/topics/undraw_Redesign_feedback_re_jvm0.png" className="custom-block-image img-fluid" alt="" />
-                                                </a>
-                                            </div>
-                                        </div>
-
-                                        <div className="col-lg-4 col-md-6 col-12">
-                                            <div className="custom-block bg-white shadow-lg">
-                                                <a href="topics-detail.html">
-                                                    <div className="d-flex">
-                                                        <div>
-                                                            <h5 className="mb-2">Logo Design</h5>
-
-                                                                <p className="mb-0">Lorem Ipsum dolor sit amet consectetur</p>
-                                                        </div>
-
-                                                        <span className="badge bg-design rounded-pill ms-auto">100</span>
-                                                    </div>
-
-                                                    <img src="images/topics/colleagues-working-cozy-office-medium-shot.png" className="custom-block-image img-fluid" alt="" />
-                                                </a>
-                                            </div>
-                                        </div>
+                                        
                                     </div>
                                 </div>
 

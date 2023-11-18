@@ -1,12 +1,26 @@
+import { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
+
+import * as eventService from './services/eventService'
 
 import { Catalog } from './components/Catalog/Catalog';
 import { Contacts } from './components/Contacts/Contacts';
 import { Navigation } from './components/Navigation/Navigation';
 import { Home } from './components/Home/Home';
 import { Footer } from './components/Footer/Footer';
+import { Register } from './components/Register/Register';
+import { Login } from './components/Login/Login';
 
 function App() {
+  const [events, setEvents] = useState([]);
+
+    useEffect(() => {
+        eventService.getAll()
+            .then(result => {
+                console.log(result);
+                setEvents(result)
+            })
+    }, []);
   return (
     <>
     <main>
@@ -14,8 +28,10 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/catalog" element={<Catalog />} />
+        <Route path="/catalog" element={<Catalog events={events} />} />
         <Route path="/contacts" element={<Contacts />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
       
 

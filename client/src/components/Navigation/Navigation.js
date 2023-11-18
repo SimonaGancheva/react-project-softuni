@@ -2,18 +2,20 @@ import { Link } from 'react-router-dom';
 
 import styles from './Navigation.module.css';
 
-
 export const Navigation = () => {
   return (
     <nav className="navbar navbar-expand-lg">
       <div className="container">
-        <a className="navbar-brand" href="index.html">
+        <Link className="navbar-brand" to="/">
           <i className="bi-back"></i>
           <span>EvenTap</span>
-        </a>
+        </Link>
 
         <div className="d-lg-none ms-auto me-4">
-          <a href="#top" className="navbar-icon bi-person smoothscroll"></a>
+          {/* <a href="#top" ></a> */}
+          <Link className="navbar-icon bi-person smoothscroll" to="/">
+            Home
+          </Link>
         </div>
 
         <button
@@ -35,16 +37,20 @@ export const Navigation = () => {
                 {/* <a className={styles.navLinkColor} href="#section_1">
                   Home
                 </a> */}
-                <Link className={styles.navLinkColor} to="/">Home</Link>
+                <Link className={styles.navLinkColor} to="/">
+                  Home
+                </Link>
               </div>
             </li>
 
             <li className="nav-item">
-            <div className="nav-link click-scroll">
+              <div className="nav-link click-scroll">
                 {/* <a className={styles.navLinkColor} href="#section_2">
                   Browse Events
                 </a> */}
-                <Link className={styles.navLinkColor} to="/catalog">Browse Events</Link>
+                <Link className={styles.navLinkColor} to="/catalog">
+                  Browse Events
+                </Link>
               </div>
             </li>
 
@@ -65,15 +71,17 @@ export const Navigation = () => {
             </li> */}
 
             <li className="nav-item">
-            <div className="nav-link click-scroll">
+              <div className="nav-link click-scroll">
                 {/* <a className={styles.navLinkColor} href="#section_5">
                   Contact
                 </a> */}
-                <Link className={styles.navLinkColor} to="/contacts">Contacts</Link>
+                <Link className={styles.navLinkColor} to="/contacts">
+                  Contacts
+                </Link>
               </div>
             </li>
 
-            <li className="nav-item dropdown">
+            {/* <li className="nav-item dropdown">
               <a
                 className="nav-link dropdown-toggle"
                 href="#"
@@ -101,11 +109,35 @@ export const Navigation = () => {
                   </a>
                 </li>
               </ul>
-            </li>
+            </li> */}
           </ul>
 
-          <div className="d-none d-lg-block">
-            <a href="#top" className="navbar-icon bi-person smoothscroll"></a>
+          <div className="d-none d-lg-block nav-item dropdown">
+            <a
+              href="#top"
+              className="navbar-icon bi-person smoothscroll nav-link dropdown-toggle"
+              id="navbarLightDropdownMenuLink"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            ></a>
+
+            <ul
+              className="dropdown-menu dropdown-menu-light"
+              aria-labelledby="navbarLightDropdownMenuLink"
+            >
+              <li>
+                <Link className="dropdown-item" to="/register">
+                  Register
+                </Link>
+              </li>
+
+              <li>
+              <Link className="dropdown-item" to="/login">
+                  Login
+                </Link>
+              </li>
+            </ul>
           </div>
         </div>
       </div>

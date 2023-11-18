@@ -7,10 +7,10 @@ export const HeroSection = () => {
         <div className="container">
           <div className="row">
             <div className="col-lg-8 col-12 mx-auto">
-              <h1 className="text-white text-center">Discover. Learn. Enjoy</h1>
+              <h1 className="text-white text-center">Discover. Attend. Enjoy</h1>
 
               <h6 className="text-center">
-                platform for creatives around the world
+                platform for virtual and on-site events
               </h6>
 
               <form
