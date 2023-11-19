@@ -8,3 +8,8 @@ export const getAll = async () => {
 
     return events;
 };
+
+export const getById = async (eventId) => {
+    const result = await request.get(`${baseUrl}/${eventId}`);
+    return result;
+}

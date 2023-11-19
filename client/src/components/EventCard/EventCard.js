@@ -1,23 +1,32 @@
-export const EventCard = ({title}) => {
-  <div className="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0">
-    <div className="custom-block bg-white shadow-lg">
-      <a href="topics-detail.html">
-        <div className="d-flex">
-          <div>
-            <h5 className="mb-2">{title}</h5>
+import { Link } from 'react-router-dom'
 
-            <p className="mb-0">Topic Listing Template based on Bootstrap 5</p>
+export const EventCard = ({
+  _id,
+  title,
+  imageUrl,
+  date,
+  site,
+  maxGuests
+}) => {
+  return (
+    <div className="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0">
+      <div className="custom-block bg-white shadow-lg">
+        <Link to={`/catalog/${_id}`}>
+          <div className="d-flex">
+            <div>
+              <h5 className="mb-2">{title}</h5>
+
+              <p className="mb-0">date: {date}</p>
+              <p className="mb-0">site: {site}</p>
+            </div>
+
+            {/* TODO: show free space left */}
+            <span className="badge bg-design rounded-pill ms-auto">{maxGuests}</span> 
           </div>
 
-          <span className="badge bg-design rounded-pill ms-auto">14</span>
-        </div>
-
-        <img
-          src="images/topics/undraw_Remote_design_team_re_urdx.png"
-          className="custom-block-image img-fluid"
-          alt=""
-        />
-      </a>
+          <img src={imageUrl} className="custom-block-image img-fluid" alt="" />
+        </Link>
+      </div>
     </div>
-  </div>;
+  );
 };

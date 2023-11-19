@@ -1,60 +1,116 @@
-import { EventCard } from "../EventCard/EventCard"
+import { EventCard } from '../EventCard/EventCard';
 
-export const Catalog = ({
-    events
-}) => {
-    return (
-        <section className="explore-section section-padding" id="section_2">
-                <div className="container">
-                    <div className="row">
+export const Catalog = ({ events }) => {
+  return (
+    <section className="explore-section section-padding" id="section_2">
+      <div className="container">
+        <div className="row">
+          <div className="col-12 text-center">
+            <h2 className="mb-4">Browse Events</h2>
+          </div>
+        </div>
+      </div>
 
-                        <div className="col-12 text-center">
-                            <h2 className="mb-4">Browse Topics</h2>
-                        </div>
+      <div className="container-fluid">
+        <div className="row">
+          <ul className="nav nav-tabs" id="myTab" role="tablist">
+            <li className="nav-item" role="presentation">
+              <button
+                className="nav-link active"
+                id="design-tab"
+                data-bs-toggle="tab"
+                data-bs-target="#design-tab-pane"
+                type="button"
+                role="tab"
+                aria-controls="design-tab-pane"
+                aria-selected="true"
+              >
+                Design
+              </button>
+            </li>
 
-                    </div>
+            <li className="nav-item" role="presentation">
+              <button
+                className="nav-link"
+                id="marketing-tab"
+                data-bs-toggle="tab"
+                data-bs-target="#marketing-tab-pane"
+                type="button"
+                role="tab"
+                aria-controls="marketing-tab-pane"
+                aria-selected="false"
+              >
+                Marketing
+              </button>
+            </li>
+
+            <li className="nav-item" role="presentation">
+              <button
+                className="nav-link"
+                id="finance-tab"
+                data-bs-toggle="tab"
+                data-bs-target="#finance-tab-pane"
+                type="button"
+                role="tab"
+                aria-controls="finance-tab-pane"
+                aria-selected="false"
+              >
+                Finance
+              </button>
+            </li>
+
+            <li className="nav-item" role="presentation">
+              <button
+                className="nav-link"
+                id="music-tab"
+                data-bs-toggle="tab"
+                data-bs-target="#music-tab-pane"
+                type="button"
+                role="tab"
+                aria-controls="music-tab-pane"
+                aria-selected="false"
+              >
+                Music
+              </button>
+            </li>
+
+            <li className="nav-item" role="presentation">
+              <button
+                className="nav-link"
+                id="education-tab"
+                data-bs-toggle="tab"
+                data-bs-target="#education-tab-pane"
+                type="button"
+                role="tab"
+                aria-controls="education-tab-pane"
+                aria-selected="false"
+              >
+                Education
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div className="container">
+        <div className="row">
+          <div className="col-12">
+            <div className="tab-content" id="myTabContent">
+              <div
+                className="tab-pane fade"
+                id="design-tab-pane"
+                role="tabpanel"
+                aria-labelledby="design-tab"
+                tabIndex="0"
+              >
+                <div className="row">
+                  {events.map((x) => (
+                    <EventCard key={x._id} {...x} />
+                  ))}
                 </div>
+              </div>
 
-                <div className="container-fluid">
-                    <div className="row">
-                        <ul className="nav nav-tabs" id="myTab" role="tablist">
-                            <li className="nav-item" role="presentation">
-                                <button className="nav-link active" id="design-tab" data-bs-toggle="tab" data-bs-target="#design-tab-pane" type="button" role="tab" aria-controls="design-tab-pane" aria-selected="true">Design</button>
-                            </li>
-
-                            <li className="nav-item" role="presentation">
-                                <button className="nav-link" id="marketing-tab" data-bs-toggle="tab" data-bs-target="#marketing-tab-pane" type="button" role="tab" aria-controls="marketing-tab-pane" aria-selected="false">Marketing</button>
-                            </li>
-
-                            <li className="nav-item" role="presentation">
-                                <button className="nav-link" id="finance-tab" data-bs-toggle="tab" data-bs-target="#finance-tab-pane" type="button" role="tab" aria-controls="finance-tab-pane" aria-selected="false">Finance</button>
-                            </li>
-
-                            <li className="nav-item" role="presentation">
-                                <button className="nav-link" id="music-tab" data-bs-toggle="tab" data-bs-target="#music-tab-pane" type="button" role="tab" aria-controls="music-tab-pane" aria-selected="false">Music</button>
-                            </li>
-
-                            <li className="nav-item" role="presentation">
-                                <button className="nav-link" id="education-tab" data-bs-toggle="tab" data-bs-target="#education-tab-pane" type="button" role="tab" aria-controls="education-tab-pane" aria-selected="false">Education</button>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div className="container">
-                    <div className="row">
-
-                        <div className="col-12">
-                            <div className="tab-content" id="myTabContent">
-                                <div className="tab-pane fade" id="design-tab-pane" role="tabpanel" aria-labelledby="design-tab" tabIndex="0">
-                                    <div className="row">
-                                        {events.map(x => <EventCard key={x._id} {...x} />)}
-
-                                        
-                                    </div>
-                                </div>
-
-                                <div className="tab-pane fade" id="marketing-tab-pane" role="tabpanel" aria-labelledby="marketing-tab" tabIndex="0">
+              <div className="tab-pane fade" id="marketing-tab-pane" role="tabpanel" aria-labelledby="marketing-tab" tabIndex="0">
                                     <div className="row">
                                         <div className="col-lg-4 col-md-6 col-12 mb-4 mb-lg-3">
                                                 <div className="custom-block bg-white shadow-lg">
@@ -272,11 +328,10 @@ export const Catalog = ({
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-
-                    </div>
-                </div>
-                </div>
-            </section>
-    )
-}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};

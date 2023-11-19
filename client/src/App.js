@@ -10,6 +10,7 @@ import { Home } from './components/Home/Home';
 import { Footer } from './components/Footer/Footer';
 import { Register } from './components/Register/Register';
 import { Login } from './components/Login/Login';
+import { EventDetails } from './components/EventDetails/EventDetails';
 
 function App() {
   const [events, setEvents] = useState([]);
@@ -29,6 +30,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/catalog" element={<Catalog events={events} />} />
+        <Route path="/catalog/:eventId" element={<EventDetails />} />
         <Route path="/contacts" element={<Contacts />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />

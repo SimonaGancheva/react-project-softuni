@@ -2,7 +2,7 @@ import {Link} from 'react-router-dom';
 
 export const Login = () => {
     return (
-        <section className="vh-100" style={{backgroundColor: "#f0f8ff"}}>
+        <section className="section-padding section-bg" style={{backgroundColor: "#f0f8ff"}}>
         <div className="container h-100">
           <div className="row d-flex justify-content-center align-items-center h-100">
             <div className="col-lg-12 col-xl-11">
@@ -36,7 +36,7 @@ export const Login = () => {
                         
       
                         <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                          <button type="button" className="btn btn-primary btn-lg">Login</button>
+                          <button type="button" className="btn btn-primary btn-lg" style={{backgroundColor: '#80d0c7', borderRadius: 30 + 'px', paddingLeft: 50 + 'px', paddingRight: 50 + 'px', border: 'none'}}><strong>Login</strong></button>
                         </div>
       
                         <div className="form-check d-flex justify-content-center mb-5">
