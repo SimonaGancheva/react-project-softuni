@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 
 import * as eventService from './services/eventService'
 
@@ -11,8 +11,10 @@ import { Footer } from './components/Footer/Footer';
 import { Register } from './components/Register/Register';
 import { Login } from './components/Login/Login';
 import { EventDetails } from './components/EventDetails/EventDetails';
+import { CreateEvent } from './components/CreateEvent/CreateEvent';
 
 function App() {
+    const navigate = useNavigate();
   const [events, setEvents] = useState([]);
 
     useEffect(() => {
@@ -22,6 +24,13 @@ function App() {
                 setEvents(result)
             })
     }, []);
+
+    const onCreateEventSubmit = async (data) => {
+        const newEvent = await eventService.create(data)
+        setEvents(state => [...state, newEvent]);
+        navigate('/catalog')
+
+    }
   return (
     <>
     <main>
@@ -34,6 +43,7 @@ function App() {
         <Route path="/contacts" element={<Contacts />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/create" element={<CreateEvent onCreateEventSubmit={onCreateEventSubmit} />} />
       </Routes>
       
 

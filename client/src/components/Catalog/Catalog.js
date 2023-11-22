@@ -11,6 +11,8 @@ export const Catalog = ({ events }) => {
         </div>
       </div>
 
+      
+
       <div className="container-fluid">
         <div className="row">
           <ul className="nav nav-tabs" id="myTab" role="tablist">

@@ -12,7 +12,7 @@ export const Navigation = () => {
         </Link>
 
         <div className="d-lg-none ms-auto me-4">
-          {/* <a href="#top" ></a> */}
+          
           <Link className="navbar-icon bi-person smoothscroll" to="/">
             Home
           </Link>
@@ -45,36 +45,26 @@ export const Navigation = () => {
 
             <li className="nav-item">
               <div className="nav-link click-scroll">
-                {/* <a className={styles.navLinkColor} href="#section_2">
-                  Browse Events
-                </a> */}
+                
                 <Link className={styles.navLinkColor} to="/catalog">
                   Browse Events
                 </Link>
               </div>
             </li>
 
-            {/* <li className="nav-item">
-            <div className="nav-link click-scroll">
-                <a className={styles.navLinkColor} href="#section_3">
-                  How It Works
-                </a>
-              </div>
-            </li> */}
+            
 
-            {/* <li className="nav-item">
+            <li className="nav-item">
             <div className="nav-link click-scroll">
-                <a className={styles.navLinkColor} href="#section_4">
-                  FAQs
-                </a>
+            <Link className={styles.navLinkColor} to="/create">
+                  Create Event
+                </Link>
               </div>
-            </li> */}
+            </li>
 
             <li className="nav-item">
               <div className="nav-link click-scroll">
-                {/* <a className={styles.navLinkColor} href="#section_5">
-                  Contact
-                </a> */}
+                
                 <Link className={styles.navLinkColor} to="/contacts">
                   Contacts
                 </Link>

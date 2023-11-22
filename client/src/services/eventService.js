@@ -13,3 +13,9 @@ export const getById = async (eventId) => {
     const result = await request.get(`${baseUrl}/${eventId}`);
     return result;
 }
+
+export const create = async (data) => {
+    const result = await request.post(baseUrl, data);
+    console.log(result);
+    return result;
+}
