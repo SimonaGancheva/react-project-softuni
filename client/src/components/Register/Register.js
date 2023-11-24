@@ -1,8 +1,137 @@
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { useState } from 'react';
+
+import styles from './Register.module.css';
 
 export const Register = () => {
+  const [values, setValues] = useState({
+    username: '',
+    email: '',
+    password: '',
+    repass: '',
+  });
+
+  const onChangeHandler = (e) => {
+    setValues((state) => ({ ...state, [e.target.name]: e.target.value }));
+  };
   return (
-    <section className="section-padding section-bg" style={{backgroundColor: "#f0f8ff"}}>
+    <section className="section-padding section-bg">
+      <div className="container">
+        <div className="row">
+          <div className={styles.rowAlign}>
+            <div className="col-lg-6 col-12">
+              <h3 className="mb-4 pb-2">Login</h3>
+            </div>
+
+            <div className="col-lg-6">
+              <form
+                // onSubmit={onSubmit}
+                className="custom-form contact-form"
+                role="form"
+              >
+                <div className="row">
+                  {/* Username */}
+                  <div className="col-lg-12 col-md-6 col-12">
+                    <div className="form-floating">
+                      <input
+                        value={values.email}
+                        onChange={onChangeHandler}
+                        type="text"
+                        name="username"
+                        id="username"
+                        className="form-control"
+                        placeholder="Username"
+                        required=""
+                      />
+
+                      <label htmlFor="floatingInput">Username</label>
+                    </div>
+                  </div>
+                  {/* Email */}
+                  <div className="col-lg-12 col-md-6 col-12">
+                    <div className="form-floating">
+                      <input
+                        value={values.email}
+                        onChange={onChangeHandler}
+                        type="email"
+                        name="email"
+                        id="email"
+                        className="form-control"
+                        placeholder="Email"
+                        pattern="[^ @]*@[^ @]*"
+                        required=""
+                      />
+
+                      <label htmlFor="floatingInput">Email</label>
+                    </div>
+                  </div>
+
+                  {/* Password */}
+                  <div className="col-lg-12 col-md-6 col-12">
+                    <div className="form-floating">
+                      <input
+                        value={values.password}
+                        onChange={onChangeHandler}
+                        type="password"
+                        name="password"
+                        id="password"
+                        className="form-control"
+                        placeholder="Password"
+                        required=""
+                      />
+
+                      <label htmlFor="floatingInput">Password</label>
+                    </div>
+                  </div>
+
+                  {/* Repass */}
+                  <div className="col-lg-12 col-md-6 col-12">
+                    <div className="form-floating">
+                      <input
+                        value={values.repass}
+                        onChange={onChangeHandler}
+                        type="repass"
+                        name="repass"
+                        id="repass"
+                        className="form-control"
+                        placeholder="Repeat Password"
+                        required=""
+                      />
+
+                      <label htmlFor="floatingInput">Repeat Password</label>
+                    </div>
+                  </div>
+
+                  <div className="col-lg-12 col-12 mx-auto">
+                    <button type="submit" className="form-control">
+                      Register
+                    </button>
+                  </div>
+                  <div className="col-lg-12 col-12">
+                    <div className="form-floating">
+                      <span
+                        className="col-lg-12 col-12"
+                        htmlFor="form2Example3"
+                      >
+                        Already have an account?{' '}
+                        <Link to="/login" style={{ color: 'darkred' }}>
+                          Login here!
+                        </Link>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+{
+  /* <section className="section-padding section-bg" style={{backgroundColor: "#f0f8ff"}}>
   <div className="container h-100">
     <div className="row d-flex justify-content-center align-items-center h-100">
       <div className="col-lg-12 col-xl-11">
@@ -82,6 +211,5 @@ export const Register = () => {
       </div>
     </div>
   </div>
-</section>
-  );
-};
+</section> */
+}

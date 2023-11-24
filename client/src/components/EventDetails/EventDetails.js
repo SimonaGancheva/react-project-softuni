@@ -15,6 +15,7 @@ export const EventDetails = () => {
       [eventId]
     );
   });
+
   return (
     //TODO refine details page
     <>
@@ -52,6 +53,9 @@ export const EventDetails = () => {
                   />
                 </div>
               </div>
+              <button type="button" className="btn btn-danger">
+                Delete Event
+              </button>
             </div>
           </div>
         </div>

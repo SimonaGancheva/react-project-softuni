@@ -1,8 +1,105 @@
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { useState } from 'react';
+
+import styles from './Login.module.css';
 
 export const Login = () => {
-    return (
-        <section className="section-padding section-bg" style={{backgroundColor: "#f0f8ff"}}>
+  const [values, setValues] = useState({
+    email: '',
+    password: '',
+  });
+
+  const onChangeHandler = (e) => {
+    setValues((state) => ({ ...state, [e.target.name]: e.target.value }));
+  };
+  return (
+    <section className="section-padding section-bg">
+      <div className="container">
+        <div className="row">
+          <div className={styles.rowAlign}>
+            <div className="col-lg-6 col-12">
+              <h3 className="mb-4 pb-2">Login</h3>
+            </div>
+
+            <div className="col-lg-6">
+              <form
+                // onSubmit={onSubmit}
+                className="custom-form contact-form"
+                role="form"
+              >
+                <div className="row">
+                  {/* Email */}
+                  <div className="col-lg-12 col-md-6 col-12">
+                    <div className="form-floating">
+                      <input
+                        value={values.email}
+                        onChange={onChangeHandler}
+                        type="email"
+                        name="email"
+                        id="email"
+                        className="form-control"
+                        placeholder="Email"
+                        pattern="[^ @]*@[^ @]*"
+                        required=""
+                      />
+
+                      <label htmlFor="floatingInput">Email</label>
+                    </div>
+                  </div>
+
+                  {/* Password */}
+                  <div className="col-lg-12 col-md-6 col-12">
+                    <div className="form-floating">
+                      <input
+                        value={values.password}
+                        onChange={onChangeHandler}
+                        type="password"
+                        name="password"
+                        id="password"
+                        className="form-control"
+                        placeholder="Password"
+                        required=""
+                      />
+
+                      <label htmlFor="floatingInput">Password</label>
+                    </div>
+                  </div>
+
+                  <div className="col-lg-12 col-12 mx-auto">
+                    <button type="submit" className="form-control">
+                      Login
+                    </button>
+                  </div>
+                  <div className="col-lg-12 col-12">
+                    <div className="form-floating">
+                      <span className="col-lg-12 col-12" htmlFor="form2Example3">
+                        Don't have an account?{' '}
+                        <Link to="/register" style={{ color: 'darkred' }}>
+                          Register here!
+                        </Link>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+
+            {/* <div className="col-lg-5 col-12 mx-auto mt-5 mt-lg-0">
+                            <iframe className="google-map map-style" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2595.065641062665!2d-122.4230416990949!3d37.80335401520422!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80858127459fabad%3A0x808ba520e5e9edb7!2sFrancisco%20Park!5e1!3m2!1sen!2sth!4v1684340239744!5m2!1sen!2sth" width="100%" height="250"  allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+                            <h5 className="mt-4 mb-2">Topic Listing Center</h5>
+
+                            <p>Bay St &amp;, Larkin St, San Francisco, CA 94109, United States</p>
+                        </div> */}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+{
+  /* <section className="section-padding section-bg" style={{backgroundColor: "#f0f8ff"}}>
         <div className="container h-100">
           <div className="row d-flex justify-content-center align-items-center h-100">
             <div className="col-lg-12 col-xl-11">
@@ -61,7 +158,5 @@ export const Login = () => {
             </div>
           </div>
         </div>
-      </section>
-        );
-    
+      </section> */
 }

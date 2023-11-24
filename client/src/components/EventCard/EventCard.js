@@ -1,15 +1,8 @@
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
-export const EventCard = ({
-  _id,
-  title,
-  imageUrl,
-  date,
-  site,
-  maxGuests
-}) => {
+export const EventCard = ({ _id, title, imageUrl, date, site, maxGuests }) => {
   return (
-    <div className="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0">
+    <div className="col-lg-4 col-md-6 col-12 mb-4 mb-lg-4">
       <div className="custom-block bg-white shadow-lg">
         <Link to={`/catalog/${_id}`}>
           <div className="d-flex">
@@ -21,7 +14,9 @@ export const EventCard = ({
             </div>
 
             {/* TODO: show free space left */}
-            <span className="badge bg-design rounded-pill ms-auto">{maxGuests}</span> 
+            <span className="badge bg-design rounded-pill ms-auto">
+              {maxGuests}
+            </span>
           </div>
 
           <img src={imageUrl} className="custom-block-image img-fluid" alt="" />
