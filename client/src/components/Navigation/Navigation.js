@@ -127,6 +127,11 @@ export const Navigation = () => {
                   Login
                 </Link>
               </li>
+              <li>
+              <Link className="dropdown-item" to="/logout">
+                  Logout
+                </Link>
+              </li>
             </ul>
           </div>
         </div>

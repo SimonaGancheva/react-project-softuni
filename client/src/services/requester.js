@@ -1,27 +1,48 @@
+import { clearUserData, getUserData } from '../utils/util';
+
+const host = 'http://localhost:3030';
+
 const request = async (method, url, data) => {
-    const options = {};
-    
-    if (method !== 'GET') {
-        options.method = method;
+  const options = {
+    method,
+    headers: {},
+  };
 
-        if (data) {
-            options.headers = {
-                'content-type': 'application/json',
-            };
+  const userData = getUserData();
 
-            options.body = JSON.stringify(data);
-        }
+  if (userData) {
+    const token = userData.accessToken;
+    options.headers['X-Authorization'] = token;
+  }
+
+  if (data !== undefined) {
+    options.headers['Content-Type'] = 'application/json';
+    options.body = JSON.stringify(data);
+  }
+
+  try {
+    const response = await fetch(host + url, options);
+
+    let result;
+
+    if (response.status != 204) {
+      result = await response.json();
     }
 
-    const response = await fetch(url, options);
+    if (response.ok == false) {
+      if (response.status == 403) {
+        clearUserData();
+      }
 
-    try {
-        const result = await response.json();
-
-        return result;
-    } catch (error) {
-        return {};
+      const error = result;
+      throw error;
     }
+
+    return result;
+  } catch (err) {
+    alert(err.message);
+    throw err;
+  }
 };
 
 export const get = request.bind(null, 'GET');

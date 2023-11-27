@@ -1,17 +1,22 @@
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useContext } from 'react';
 
 import styles from './Login.module.css';
+import { AuthContext } from '../../contexts/AuthContext';
+import { useForm } from '../../hooks/useForm';
 
 export const Login = () => {
-  const [values, setValues] = useState({
+  const { onLoginSubmit } = useContext(AuthContext);
+
+  const initValues = {
     email: '',
     password: '',
-  });
-
-  const onChangeHandler = (e) => {
-    setValues((state) => ({ ...state, [e.target.name]: e.target.value }));
   };
+  const { values, onChangeHandler, onSubmit } = useForm(
+    initValues,
+    onLoginSubmit
+  );
+
   return (
     <section className="section-padding section-bg">
       <div className="container">
@@ -23,7 +28,8 @@ export const Login = () => {
 
             <div className="col-lg-6">
               <form
-                // onSubmit={onSubmit}
+                method="POST"
+                onSubmit={onSubmit}
                 className="custom-form contact-form"
                 role="form"
               >
@@ -72,7 +78,10 @@ export const Login = () => {
                   </div>
                   <div className="col-lg-12 col-12">
                     <div className="form-floating">
-                      <span className="col-lg-12 col-12" htmlFor="form2Example3">
+                      <span
+                        className="col-lg-12 col-12"
+                        htmlFor="form2Example3"
+                      >
                         Don't have an account?{' '}
                         <Link to="/register" style={{ color: 'darkred' }}>
                           Register here!

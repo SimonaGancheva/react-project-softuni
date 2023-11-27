@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 
-import * as eventService from './services/eventService'
+import * as eventService from './services/eventService';
+import * as authService from './services/authService';
+import { AuthContext } from './contexts/AuthContext';
 
 import { Catalog } from './components/Catalog/Catalog';
 import { Contacts } from './components/Contacts/Contacts';
@@ -12,42 +14,74 @@ import { Register } from './components/Register/Register';
 import { Login } from './components/Login/Login';
 import { EventDetails } from './components/EventDetails/EventDetails';
 import { CreateEvent } from './components/CreateEvent/CreateEvent';
+import { Logout } from './components/Logout/Logout';
 
 function App() {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   const [events, setEvents] = useState([]);
+  const [user, setUser] = useState([]);
 
-    useEffect(() => {
-        eventService.getAll()
-            .then(result => {
-                console.log(result);
-                setEvents(result)
-            })
-    }, []);
+  useEffect(() => {
+    eventService.getAll().then((result) => {
+      console.log(result);
+      setEvents(result);
+    });
+  }, []);
 
-    const onCreateEventSubmit = async (data) => {
-        const newEvent = await eventService.create(data)
-        setEvents(state => [...state, newEvent]);
-        navigate('/catalog')
+  const onCreateEventSubmit = async (data) => {
+    const newEvent = await eventService.create(data);
+    setEvents((state) => [...state, newEvent]);
+    navigate('/catalog');
+  };
 
+  const onLoginSubmit = async (data) => {
+    const {email, password} = data;
+    const result = await authService.login(email, password);
+    try {
+      setUser(result);
+      navigate('/');
+    } catch (error) {
+      console.log(error.message);
     }
+  };
+
+  const onRegisterSubmit = async (data) => {
+    const {username, email, password} = data;
+    const result = await authService.register(username, email, password);
+    try {
+      setUser(result);
+      navigate('/');
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  const logoutHandler = () => {
+    // await authService.logout();
+    setUser({});
+
+  }
+
   return (
-    <>
-    <main>
-      <Navigation />
+    <AuthContext.Provider value={{ onLoginSubmit, onRegisterSubmit, logoutHandler }}>
+      <main>
+        <Navigation />
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/catalog" element={<Catalog events={events} />} />
-        <Route path="/catalog/:eventId" element={<EventDetails />} />
-        <Route path="/contacts" element={<Contacts />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/create" element={<CreateEvent onCreateEventSubmit={onCreateEventSubmit} />} />
-      </Routes>
-      
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/catalog" element={<Catalog events={events} />} />
+          <Route path="/catalog/:eventId" element={<EventDetails />} />
+          <Route path="/contacts" element={<Contacts />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/logout" element={<Logout />} />
+          <Route
+            path="/create"
+            element={<CreateEvent onCreateEventSubmit={onCreateEventSubmit} />}
+          />
+        </Routes>
 
-      {/* <section className="faq-section section-padding" id="section_4">
+        {/* <section className="faq-section section-padding" id="section_4">
                 <div className="container">
                     <div className="row">
 
@@ -110,10 +144,10 @@ function App() {
                     </div>
                 </div>
             </section> */}
-    </main>
+      </main>
 
-    <Footer />
-    </>
+      <Footer />
+    </AuthContext.Provider>
   );
 }
 

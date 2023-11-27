@@ -20,7 +20,7 @@ export const Register = () => {
         <div className="row">
           <div className={styles.rowAlign}>
             <div className="col-lg-6 col-12">
-              <h3 className="mb-4 pb-2">Login</h3>
+              <h3 className="mb-4 pb-2">Register</h3>
             </div>
 
             <div className="col-lg-6">
