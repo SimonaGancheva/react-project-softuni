@@ -15,6 +15,7 @@ import { Login } from './components/Login/Login';
 import { EventDetails } from './components/EventDetails/EventDetails';
 import { CreateEvent } from './components/CreateEvent/CreateEvent';
 import { Logout } from './components/Logout/Logout';
+import { UserProfile } from './components/UserProfile/UserProfile';
 
 function App() {
   const navigate = useNavigate();
@@ -62,8 +63,22 @@ function App() {
 
   }
 
+  const isAuthenticated = !!user.accessToken;
+
+  const contextData = {
+    userId: user._id,
+    userEmail: user.email,
+    username: user.username,
+    token: user.accessToken,
+    isAuthenticated,
+    onLoginSubmit,
+    onRegisterSubmit,
+    logoutHandler,
+
+  }
+
   return (
-    <AuthContext.Provider value={{ onLoginSubmit, onRegisterSubmit, logoutHandler }}>
+    <AuthContext.Provider value={contextData}>
       <main>
         <Navigation />
 
@@ -74,6 +89,7 @@ function App() {
           <Route path="/contacts" element={<Contacts />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/profile" element={<UserProfile />} />
           <Route path="/logout" element={<Logout />} />
           <Route
             path="/create"

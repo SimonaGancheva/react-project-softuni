@@ -1,8 +1,11 @@
 import { Link } from 'react-router-dom';
 
 import styles from './Navigation.module.css';
+import { useContext } from 'react';
+import { AuthContext } from '../../contexts/AuthContext';
 
 export const Navigation = () => {
+  const { isAuthenticated, username } = useContext(AuthContext);
   return (
     <nav className="navbar navbar-expand-lg">
       <div className="container">
@@ -12,7 +15,6 @@ export const Navigation = () => {
         </Link>
 
         <div className="d-lg-none ms-auto me-4">
-          
           <Link className="navbar-icon bi-person smoothscroll" to="/">
             Home
           </Link>
@@ -45,18 +47,15 @@ export const Navigation = () => {
 
             <li className="nav-item">
               <div className="nav-link click-scroll">
-                
                 <Link className={styles.navLinkColor} to="/catalog">
                   Browse Events
                 </Link>
               </div>
             </li>
 
-            
-
             <li className="nav-item">
-            <div className="nav-link click-scroll">
-            <Link className={styles.navLinkColor} to="/create">
+              <div className="nav-link click-scroll">
+                <Link className={styles.navLinkColor} to="/create">
                   Create Event
                 </Link>
               </div>
@@ -64,7 +63,6 @@ export const Navigation = () => {
 
             <li className="nav-item">
               <div className="nav-link click-scroll">
-                
                 <Link className={styles.navLinkColor} to="/contacts">
                   Contacts
                 </Link>
@@ -116,22 +114,36 @@ export const Navigation = () => {
               className="dropdown-menu dropdown-menu-light"
               aria-labelledby="navbarLightDropdownMenuLink"
             >
-              <li>
-                <Link className="dropdown-item" to="/register">
-                  Register
-                </Link>
-              </li>
+              {isAuthenticated && (
+                <>
+                  <li>
+                    <Link className="dropdown-item" to="/profile">
+                      {username}'s profile
+                    </Link>
+                  </li>
+                  <li>
+                    <Link className="dropdown-item" to="/logout">
+                      Logout
+                    </Link>
+                  </li>
+                </>
+              )}
 
-              <li>
-              <Link className="dropdown-item" to="/login">
-                  Login
-                </Link>
-              </li>
-              <li>
-              <Link className="dropdown-item" to="/logout">
-                  Logout
-                </Link>
-              </li>
+              {!isAuthenticated && (
+                <>
+                  <li>
+                    <Link className="dropdown-item" to="/register">
+                      Register
+                    </Link>
+                  </li>
+
+                  <li>
+                    <Link className="dropdown-item" to="/login">
+                      Login
+                    </Link>
+                  </li>
+                </>
+              )}
             </ul>
           </div>
         </div>

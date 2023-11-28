@@ -1,19 +1,23 @@
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useContext } from 'react';
 
 import styles from './Register.module.css';
+import { AuthContext } from '../../contexts/AuthContext';
+import { useForm } from '../../hooks/useForm';
 
 export const Register = () => {
-  const [values, setValues] = useState({
+  const { onRegisterSubmit } = useContext(AuthContext);
+
+  const initValues = {
     username: '',
     email: '',
     password: '',
     repass: '',
-  });
-
-  const onChangeHandler = (e) => {
-    setValues((state) => ({ ...state, [e.target.name]: e.target.value }));
   };
+  const { values, onChangeHandler, onSubmit } = useForm(
+    initValues,
+    onRegisterSubmit
+  );
   return (
     <section className="section-padding section-bg">
       <div className="container">
@@ -25,7 +29,7 @@ export const Register = () => {
 
             <div className="col-lg-6">
               <form
-                // onSubmit={onSubmit}
+                onSubmit={onSubmit}
                 className="custom-form contact-form"
                 role="form"
               >
@@ -34,7 +38,7 @@ export const Register = () => {
                   <div className="col-lg-12 col-md-6 col-12">
                     <div className="form-floating">
                       <input
-                        value={values.email}
+                        value={values.username}
                         onChange={onChangeHandler}
                         type="text"
                         name="username"
@@ -90,7 +94,7 @@ export const Register = () => {
                       <input
                         value={values.repass}
                         onChange={onChangeHandler}
-                        type="repass"
+                        type="password"
                         name="repass"
                         id="repass"
                         className="form-control"
