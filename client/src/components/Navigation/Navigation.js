@@ -53,13 +53,15 @@ export const Navigation = () => {
               </div>
             </li>
 
-            <li className="nav-item">
-              <div className="nav-link click-scroll">
-                <Link className={styles.navLinkColor} to="/create">
-                  Create Event
-                </Link>
-              </div>
-            </li>
+            {isAuthenticated && (
+              <li className="nav-item">
+                <div className="nav-link click-scroll">
+                  <Link className={styles.navLinkColor} to="/create">
+                    Create Event
+                  </Link>
+                </div>
+              </li>
+            )}
 
             <li className="nav-item">
               <div className="nav-link click-scroll">

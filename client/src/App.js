@@ -36,7 +36,10 @@ function App() {
   };
 
   const onLoginSubmit = async (data) => {
-    const {email, password} = data;
+    const { email, password } = data;
+    if (email == '' || password == '') {
+      return alert('All fields are required!');
+    }
     const result = await authService.login(email, password);
     try {
       setUser(result);
@@ -47,7 +50,13 @@ function App() {
   };
 
   const onRegisterSubmit = async (data) => {
-    const {username, email, password} = data;
+    const { username, email, password, repass } = data;
+    if (email == '' || password == '' || username == '') {
+      return alert('All fields are required!');
+    }
+    if (repass !== password) {
+      return alert("Passwords don't match!");
+    }
     const result = await authService.register(username, email, password);
     try {
       setUser(result);
@@ -57,11 +66,10 @@ function App() {
     }
   };
 
-  const logoutHandler = () => {
-    // await authService.logout();
+  const onLogout = () => {
+    
     setUser({});
-
-  }
+  };
 
   const isAuthenticated = !!user.accessToken;
 
@@ -73,9 +81,8 @@ function App() {
     isAuthenticated,
     onLoginSubmit,
     onRegisterSubmit,
-    logoutHandler,
-
-  }
+     onLogout,
+  };
 
   return (
     <AuthContext.Provider value={contextData}>

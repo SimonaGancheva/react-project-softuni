@@ -1,9 +1,9 @@
 import * as request from './requester';
 
 const endpoints = {
-    allEvents: '/jsonstore/events?sortBy=_createdOn%20desc',
-    byId: '/jsonstore/events/',
-    addEvent: '/jsonstore/events'
+    allEvents: '/jsonstore/events',
+    byId: '/data/events/',
+    addEvent: '/data/events'
 };
 
 export const getAll = async () => {

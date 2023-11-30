@@ -1,26 +1,23 @@
 import { useState } from 'react';
 import styles from './CreateEvent.module.css';
+import { useForm } from '../../hooks/useForm';
 
 export const CreateEvent = ({ onCreateEventSubmit }) => {
-  const [values, setValues] = useState({
-    title: '',
+  const initValues = {
+    itle: '',
     category: '',
     site: '',
     imageUrl: '',
     summary: '',
     date: '',
     maxGuests: '',
-  });
-
-  const onChangeHandler = (e) => {
-    setValues((state) => ({ ...state, [e.target.name]: e.target.value }));
   };
 
-  const onSubmit = (e) => {
-    e.preventDefault();
+  const { values, onChangeHandler, onSubmit } = useForm(
+    initValues,
+    onCreateEventSubmit
+  );
 
-    onCreateEventSubmit(values);
-  };
   return (
     <section className="section-padding section-bg">
       <div className="container">
@@ -33,6 +30,7 @@ export const CreateEvent = ({ onCreateEventSubmit }) => {
             <div className="col-lg-6">
               <form
                 onSubmit={onSubmit}
+                method= "POST"
                 className="custom-form contact-form"
                 role="form"
               >

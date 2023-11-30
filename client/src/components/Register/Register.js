@@ -30,6 +30,7 @@ export const Register = () => {
             <div className="col-lg-6">
               <form
                 onSubmit={onSubmit}
+                method="POST"
                 className="custom-form contact-form"
                 role="form"
               >
