@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import * as eventService from '../../services/eventService';
 import { AuthContext } from '../../contexts/AuthContext';
@@ -7,9 +8,14 @@ import { AuthContext } from '../../contexts/AuthContext';
 import styles from './EventDetails.module.css';
 
 export const EventDetails = () => {
-  const { userId } = useContext(AuthContext);
+  const { userId, onDeleteEventSubmit } = useContext(AuthContext);
+  const navigate = useNavigate();
+
   const [event, setEvent] = useState([]);
   const { eventId } = useParams();
+
+  const isOwner = userId == event._ownerId;
+  const canAttend = !isOwner && userId;
 
   useEffect(() => {
     eventService.getById(eventId).then((result) => {
@@ -17,8 +23,15 @@ export const EventDetails = () => {
     });
   }, [eventId]);
 
-  const isOwner = userId == event._ownerId;
-  const canAttend = !isOwner && userId;
+  const onDeleteClick = async () => {
+    const choice = window.confirm(
+      `Are you sure you want to delete ${event.title}?`
+    );
+
+    if (choice) {
+      await onDeleteEventSubmit(eventId);
+    }
+  };
 
   return (
     //TODO refine details page
@@ -60,9 +73,13 @@ export const EventDetails = () => {
               {isOwner && (
                 <div className={styles.ownerButtons}>
                   <button type="button" className="btn btn-warning">
-                    Edit Event
+                    <Link to={`/catalog/${event._id}/edit`}>Edit Event</Link>
                   </button>
-                  <button type="button" className="btn btn-danger">
+                  <button
+                    type="button"
+                    className="btn btn-danger"
+                    onClick={onDeleteClick}
+                  >
                     Delete Event
                   </button>
                 </div>
@@ -72,7 +89,6 @@ export const EventDetails = () => {
                   <button type="button" className="btn btn-info">
                     Attend Event
                   </button>
-                  
                 </div>
               )}
             </div>

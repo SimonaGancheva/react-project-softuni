@@ -16,6 +16,7 @@ import { EventDetails } from './components/EventDetails/EventDetails';
 import { CreateEvent } from './components/CreateEvent/CreateEvent';
 import { Logout } from './components/Logout/Logout';
 import { UserProfile } from './components/UserProfile/UserProfile';
+import { EditEvent } from './components/EditEvent/EditEvent';
 
 function App() {
   const navigate = useNavigate();
@@ -35,6 +36,19 @@ function App() {
     navigate('/catalog');
   };
 
+  const onEditEventSubmit = async (data) => {
+    const updatedEvent = await eventService.edit(data._id, data);
+    // setEvents((state) => state.map((x) => x._id !== eventId))
+    navigate(`/catalog/${data._id}`);
+    
+  };
+
+  const onDeleteEventSubmit = (eventId) => {
+    eventService.deleteById(eventId);
+    setEvents((state) => state.filter((x) => x._id !== eventId));
+    navigate('/catalog');
+  };
+
   const onLoginSubmit = async (data) => {
     const { email, password } = data;
     if (email == '' || password == '') {
@@ -51,7 +65,7 @@ function App() {
 
   const onRegisterSubmit = async (data) => {
     const { username, email, password, repass } = data;
-    if (email == '' || password == '' || username == '') {
+    if (email === '' || password === '' || username === '') {
       return alert('All fields are required!');
     }
     if (repass !== password) {
@@ -67,10 +81,10 @@ function App() {
   };
 
   const onLogout = () => {
-    
     setUser({});
   };
 
+  //TODO: check for token in localStorage!
   const isAuthenticated = !!user.accessToken;
 
   const contextData = {
@@ -81,7 +95,9 @@ function App() {
     isAuthenticated,
     onLoginSubmit,
     onRegisterSubmit,
-     onLogout,
+    onLogout,
+    onDeleteEventSubmit,
+    onEditEventSubmit,
   };
 
   return (
@@ -93,6 +109,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/catalog" element={<Catalog events={events} />} />
           <Route path="/catalog/:eventId" element={<EventDetails />} />
+          <Route path="/catalog/:eventId/edit" element={<EditEvent />} />
           <Route path="/contacts" element={<Contacts />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />

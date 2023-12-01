@@ -1,25 +1,30 @@
 import * as request from './requester';
 
 const endpoints = {
-    allEvents: '/data/events',
-    byId: '/data/events/',
-    addEvent: '/data/events'
+  allEvents: '/data/events?sortBy=_createdOn%20desc',
+  byId: '/data/events/',
+  addEvent: '/data/events',
 };
 
 export const getAll = async () => {
-    const result = await request.get(endpoints.allEvents);
-    const events = Object.values(result);
+  const result = await request.get(endpoints.allEvents);
+  const events = Object.values(result);
 
-    return events;
+  return events;
 };
 
 export const getById = async (eventId) => {
-    const result = await request.get(endpoints.byId + eventId);
-    return result;
-}
+  return await request.get(endpoints.byId + eventId);
+};
 
 export const create = async (data) => {
-    const result = await request.post(endpoints.addEvent, data);
-    console.log(result);
-    return result;
+  return await request.post(endpoints.addEvent, data);
+};
+
+export const deleteById = async (eventId) => {
+  return await request.del(endpoints.byId + eventId);
+};
+
+export const edit = async (eventId, data) => {
+  return await request.put(endpoints.byId + eventId, data);
 }
