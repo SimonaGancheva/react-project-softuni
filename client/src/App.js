@@ -38,7 +38,7 @@ function App() {
 
   const onEditEventSubmit = async (data) => {
     const updatedEvent = await eventService.edit(data._id, data);
-    // setEvents((state) => state.map((x) => x._id !== eventId))
+    setEvents((state) => state.map((x) => x._id === data._id ? updatedEvent : x))
     navigate(`/catalog/${data._id}`);
     
   };
