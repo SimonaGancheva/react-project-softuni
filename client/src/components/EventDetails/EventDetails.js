@@ -1,20 +1,24 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import * as eventService from '../../services/eventService';
+import { AuthContext } from '../../contexts/AuthContext';
+
+import styles from './EventDetails.module.css';
 
 export const EventDetails = () => {
+  const { userId } = useContext(AuthContext);
   const [event, setEvent] = useState([]);
   const { eventId } = useParams();
 
   useEffect(() => {
-    eventService.getById(eventId).then(
-      (result) => {
-        setEvent(result);
-      },
-      [eventId]
-    );
-  });
+    eventService.getById(eventId).then((result) => {
+      setEvent(result);
+    });
+  }, [eventId]);
+
+  const isOwner = userId == event._ownerId;
+  const canAttend = !isOwner && userId;
 
   return (
     //TODO refine details page
@@ -53,9 +57,24 @@ export const EventDetails = () => {
                   />
                 </div>
               </div>
-              <button type="button" className="btn btn-danger">
-                Delete Event
-              </button>
+              {isOwner && (
+                <div className={styles.ownerButtons}>
+                  <button type="button" className="btn btn-warning">
+                    Edit Event
+                  </button>
+                  <button type="button" className="btn btn-danger">
+                    Delete Event
+                  </button>
+                </div>
+              )}
+              {canAttend && (
+                <div className={styles.ownerButtons}>
+                  <button type="button" className="btn btn-info">
+                    Attend Event
+                  </button>
+                  
+                </div>
+              )}
             </div>
           </div>
         </div>

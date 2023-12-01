@@ -4,7 +4,7 @@ import { useForm } from '../../hooks/useForm';
 
 export const CreateEvent = ({ onCreateEventSubmit }) => {
   const initValues = {
-    itle: '',
+    title: '',
     category: '',
     site: '',
     imageUrl: '',
@@ -153,7 +153,7 @@ export const CreateEvent = ({ onCreateEventSubmit }) => {
                         id="name"
                         className="form-control"
                         placeholder="Image"
-                        pattern="https?:\/\/.*\.(?:png|jpg)"
+                        // pattern="https?:\/\/.*"
                         required=""
                       />
 

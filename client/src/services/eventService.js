@@ -1,7 +1,7 @@
 import * as request from './requester';
 
 const endpoints = {
-    allEvents: '/jsonstore/events',
+    allEvents: '/data/events',
     byId: '/data/events/',
     addEvent: '/data/events'
 };
