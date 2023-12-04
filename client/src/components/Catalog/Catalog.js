@@ -1,6 +1,9 @@
+import { useContext } from 'react';
 import { EventCard } from '../EventCard/EventCard';
+import { EventContext } from '../../contexts/EventContext';
 
-export const Catalog = ({ events }) => {
+export const Catalog = () => {
+  const {events} = useContext(EventContext);
   return (
     <section className="explore-section section-padding" id="section_2">
       <div className="container">

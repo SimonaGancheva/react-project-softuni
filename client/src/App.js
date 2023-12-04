@@ -1,10 +1,9 @@
-import { useState, useEffect } from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom';
 
-import * as eventService from './services/eventService';
-import * as authService from './services/authService';
-import { AuthContext } from './contexts/AuthContext';
+import { Routes, Route } from 'react-router-dom';
 
+
+
+import { AuthProvider } from './contexts/AuthContext';
 import { Catalog } from './components/Catalog/Catalog';
 import { Contacts } from './components/Contacts/Contacts';
 import { Navigation } from './components/Navigation/Navigation';
@@ -17,111 +16,29 @@ import { CreateEvent } from './components/CreateEvent/CreateEvent';
 import { Logout } from './components/Logout/Logout';
 import { UserProfile } from './components/UserProfile/UserProfile';
 import { EditEvent } from './components/EditEvent/EditEvent';
+import { EventProvider } from './contexts/EventContext';
 
 function App() {
-  const navigate = useNavigate();
-  const [events, setEvents] = useState([]);
-  const [user, setUser] = useState([]);
-
-  useEffect(() => {
-    eventService.getAll().then((result) => {
-      console.log(result);
-      setEvents(result);
-    });
-  }, []);
-
-  const onCreateEventSubmit = async (data) => {
-    const newEvent = await eventService.create(data);
-    setEvents((state) => [...state, newEvent]);
-    navigate('/catalog');
-  };
-
-  const onEditEventSubmit = async (data) => {
-    const updatedEvent = await eventService.edit(data._id, data);
-    setEvents((state) => state.map((x) => x._id === data._id ? updatedEvent : x))
-    navigate(`/catalog/${data._id}`);
-    
-  };
-
-  const onDeleteEventSubmit = (eventId) => {
-    eventService.deleteById(eventId);
-    setEvents((state) => state.filter((x) => x._id !== eventId));
-    navigate('/catalog');
-  };
-
-  const onLoginSubmit = async (data) => {
-    const { email, password } = data;
-    if (email == '' || password == '') {
-      return alert('All fields are required!');
-    }
-    const result = await authService.login(email, password);
-    try {
-      setUser(result);
-      navigate('/');
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
-
-  const onRegisterSubmit = async (data) => {
-    const { username, email, password, repass } = data;
-    if (email === '' || password === '' || username === '') {
-      return alert('All fields are required!');
-    }
-    if (repass !== password) {
-      return alert("Passwords don't match!");
-    }
-    const result = await authService.register(username, email, password);
-    try {
-      setUser(result);
-      navigate('/');
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
-
-  const onLogout = () => {
-    setUser({});
-  };
-
-  //TODO: check for token in localStorage!
-  const isAuthenticated = !!user.accessToken;
-
-  const contextData = {
-    userId: user._id,
-    userEmail: user.email,
-    username: user.username,
-    token: user.accessToken,
-    isAuthenticated,
-    onLoginSubmit,
-    onRegisterSubmit,
-    onLogout,
-    onDeleteEventSubmit,
-    onEditEventSubmit,
-  };
-
   return (
-    <AuthContext.Provider value={contextData}>
-      <main>
-        <Navigation />
+    <EventProvider>
+      <AuthProvider>
+        <main>
+          <Navigation />
 
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/catalog" element={<Catalog events={events} />} />
-          <Route path="/catalog/:eventId" element={<EventDetails />} />
-          <Route path="/catalog/:eventId/edit" element={<EditEvent />} />
-          <Route path="/contacts" element={<Contacts />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/profile" element={<UserProfile />} />
-          <Route path="/logout" element={<Logout />} />
-          <Route
-            path="/create"
-            element={<CreateEvent onCreateEventSubmit={onCreateEventSubmit} />}
-          />
-        </Routes>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/catalog" element={<Catalog/>} />
+            <Route path="/catalog/:eventId" element={<EventDetails />} />
+            <Route path="/catalog/:eventId/edit" element={<EditEvent />} />
+            <Route path="/contacts" element={<Contacts />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/profile" element={<UserProfile />} />
+            <Route path="/logout" element={<Logout />} />
+            <Route path="/create" element={<CreateEvent />} />
+          </Routes>
 
-        {/* <section className="faq-section section-padding" id="section_4">
+          {/* <section className="faq-section section-padding" id="section_4">
                 <div className="container">
                     <div className="row">
 
@@ -184,10 +101,11 @@ function App() {
                     </div>
                 </div>
             </section> */}
-      </main>
+        </main>
 
-      <Footer />
-    </AuthContext.Provider>
+        <Footer />
+      </AuthProvider>
+    </EventProvider>
   );
 }
 

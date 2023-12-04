@@ -7,9 +7,8 @@ import { AuthContext } from '../../contexts/AuthContext';
 
 import styles from './EventDetails.module.css';
 
-export const EventDetails = () => {
-  const { userId, onDeleteEventSubmit } = useContext(AuthContext);
-  const navigate = useNavigate();
+export const EventDetails = ({ onDeleteEventSubmit }) => {
+  const { userId } = useContext(AuthContext);
 
   const [event, setEvent] = useState([]);
   const { eventId } = useParams();

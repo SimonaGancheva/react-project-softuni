@@ -1,13 +1,12 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from '../../hooks/useForm';
-import { AuthContext } from '../../contexts/AuthContext';
+
 import * as eventService from '../../services/eventService';
 
 import styles from './EditEvent.module.css';
 import { useParams } from 'react-router-dom';
 
-export const EditEvent = () => {
-  const { onEditEventSubmit } = useContext(AuthContext);
+export const EditEvent = ({ onEditEventSubmit }) => {
   const { eventId } = useParams();
   const initValues = useState({
     _id: '',

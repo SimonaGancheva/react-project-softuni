@@ -1333,34 +1333,38 @@
         }
     };
     var seedData = {
-        games: {
-            "ff436770-76c5-40e2-b231-77409eda7a61": {
-                "_ownerId": "35c62d76-8152-4626-8712-eeb96381bea8",
-                "title": "CoverFire",
-                "category": "Action",
-                "maxLevel": "70",
-                "imageUrl": "/images/CoverFire.png",
-                "summary": "Best action shooter game, easy controls, realistic 3D graphics and fun offline missions. Get your best shooting gun and take to action!",
-                "_createdOn": 1617194128618,
-            },
-            "1840a313-225c-416a-817a-9954d4609f7c": {
-                "_ownerId": "35c62d76-8152-4626-8712-eeb96381bea8",
-                "title": "MineCraft",
-                "category": "Arcade",
-                "maxLevel": "250",
-                "imageUrl": "/images/MineCraft.png",
-                "summary": "Set in a world where fantasy creatures live side by side with humans. A human cop is forced to work with an Orc to find a weapon everyone is prepared to kill for. Set in a world where fantasy creatures live side by side with humans. A human cop is forced to work with an Orc to find a weapon everyone is prepared to kill for.",
-                "_createdOn": 1617194210928,
-            },
-            "126777f5-3277-42ad-b874-76d043b069cb": {
-                "_ownerId": "847ec027-f659-4086-8032-5173e2f9c93a",
-                "title": "Zombie Lang",
-                "category": "Vertical Shooter",
-                "maxLevel": "100",
-                "imageUrl": "/images/ZombieLang.png",
-                "summary": "With it’s own unique story, set between the events of the first movie, Zombieland: Double Tap- Road Trip is a ridiculously fun top-down twin-stick shooter featuring local co-op multiplayer for up to four players. Play as your favorite heroes from the original — Tallahassee, Columbus, Wichita and Little Rock — as well as new unlockable characters from the upcoming sequel.  The game embraces the game-like elements seen in the film by  incorporating everything from the “Rules” to “Zombie Kill of the Week”.  Use your special abilities, an arsenal of weapons and the essential Zombieland rules for survival to stay alive against huge numbers of uniquely grotesque and dangerous undead monstrosities in Zombieland: Double Tap- Road Trip’s story-based campaign mode, wave-based horde mode, and boss battles.",
-                "_createdOn": 1617194295474,
-            }
+        // TODO: hardcode events
+        events: {
+            "c32741f2-4d95-4c4f-a4fa-293ee7dd6d8f": {
+                "title": "The future of programming",
+                "category": "IT",
+                "site": "virtual",
+                "date": "2023-12-15",
+                "maxGuests": 20,
+                "summary": "What will be the future of programming? Will new engeneers be needed?",
+                "imageUrl": "https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/advisor/wp-content/uploads/2023/07/computer-coding.jpg",
+                "_id": "c32741f2-4d95-4c4f-a4fa-293ee7dd6d8f"
+              },
+              "f787bd8d-a2ad-4e27-8c71-a7f8033100a0": {
+                "title": "History of Architecture",
+                "category": "Architecture",
+                "site": "Sofia",
+                "date": "2024-1-18",
+                "maxGuests": 50,
+                "summary": "The history of architecture will be discussed",
+                "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/%CE%9D%CE%B1%CF%8C%CF%82_%CF%84%CE%BF%CF%85_%CE%97%CF%86%CE%B1%CE%AF%CF%83%CF%84%CE%BF%CF%85.jpg/383px-%CE%9D%CE%B1%CF%8C%CF%82_%CF%84%CE%BF%CF%85_%CE%97%CF%86%CE%B1%CE%AF%CF%83%CF%84%CE%BF%CF%85.jpg",
+                "_id": "f787bd8d-a2ad-4e27-8c71-a7f8033100a0"
+              },
+              "7353f353-e5eb-4137-8b10-bfb649ebf376": {
+                "title": "Fashion trends spring/summer 2024",
+                "category": "Fashion",
+                "site": "Plovdiv",
+                "date": "2024-2-22",
+                "maxGuests": 100,
+                "summary": "Which colors and patterns will we be seeing in stores?",
+                "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbERJSbn_5Rj2MoB0ZUin9A37uvk_tVpA8UA&usqp=CAU",
+                "_id": "7353f353-e5eb-4137-8b10-bfb649ebf376"
+              }
         },
         comments: {
         

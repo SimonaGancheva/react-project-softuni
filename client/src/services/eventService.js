@@ -1,7 +1,7 @@
 import * as request from './requester';
 
 const endpoints = {
-  allEvents: '/data/events?sortBy=_createdOn%20desc',
+  allEvents: '/data/events',
   byId: '/data/events/',
   addEvent: '/data/events',
 };

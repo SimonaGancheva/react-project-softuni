@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import styles from './CreateEvent.module.css';
 import { useForm } from '../../hooks/useForm';
+import { EventContext } from '../../contexts/EventContext';
 
-export const CreateEvent = ({ onCreateEventSubmit }) => {
+export const CreateEvent = () => {
+  const { onCreateEventSubmit } = useContext(EventContext);
   const initValues = {
     title: '',
     category: '',
@@ -30,7 +32,7 @@ export const CreateEvent = ({ onCreateEventSubmit }) => {
             <div className="col-lg-6">
               <form
                 onSubmit={onSubmit}
-                method= "POST"
+                method="POST"
                 className="custom-form contact-form"
                 role="form"
               >
