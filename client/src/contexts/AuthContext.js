@@ -1,14 +1,15 @@
 import { createContext } from 'react';
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import * as authService from '../services/authService';
+import { useLocalStorage } from '../hooks/useLocalStorage';
+import { clearUserData } from '../utils/util';
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
-  const [user, setUser] = useState([]);
+  const [user, setUser] = useLocalStorage({});
 
   const onLoginSubmit = async (data) => {
     const { email, password } = data;
@@ -43,6 +44,7 @@ export const AuthProvider = ({ children }) => {
 
   const onLogout = () => {
     setUser({});
+    clearUserData();
   };
 
   //TODO: check for token in localStorage!

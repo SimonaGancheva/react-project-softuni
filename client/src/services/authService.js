@@ -9,17 +9,17 @@ const endpoints = {
 
 export const login = async (email, password) => {
   const result = await request.post(endpoints.login, {email,password});
-  setUserData(result)
+  // setUserData(result)
   return result;
 };
 
 export const register = async (username, email, password) => {
   const result = await request.post(endpoints.register, {username, email, password});
-  setUserData(result);
+  // setUserData(result);
   return result;
 }
 
 export const logout = async () => {
   await request.get(endpoints.logout);
-  clearUserData();
+  // clearUserData();
 }
