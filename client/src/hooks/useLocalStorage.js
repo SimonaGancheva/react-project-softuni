@@ -4,8 +4,8 @@ import { getUserData, setUserData } from '../utils/util';
 export const useLocalStorage = (initValue) => {
   const [state, setState] = useState(() => {
     const persistedState = getUserData();
-    if(persistedState) {
-        return persistedState;
+    if (persistedState) {
+      return persistedState;
     }
 
     return initValue;

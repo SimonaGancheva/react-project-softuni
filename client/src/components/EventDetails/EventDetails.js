@@ -3,22 +3,30 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 import * as eventService from '../../services/eventService';
+import * as attendService from '../../services/attendService';
 import { AuthContext } from '../../contexts/AuthContext';
 
 import styles from './EventDetails.module.css';
+import { attend } from '../../services/attendService';
 
 export const EventDetails = ({ onDeleteEventSubmit }) => {
-  const { userId } = useContext(AuthContext);
+  const { userId, isAuthenticated } = useContext(AuthContext);
 
-  const [event, setEvent] = useState([]);
   const { eventId } = useParams();
 
-  const isOwner = userId == event._ownerId;
-  const canAttend = !isOwner && userId;
+  const [event, setEvent] = useState([]);
+  const [attends, setAttends] = useState(0);
+  const [isAttending, setAttending] = useState(false);
+
+  const isOwner = isAuthenticated && userId === event._ownerId;
+  const canAttend = isAuthenticated && !isOwner && userId;
 
   useEffect(() => {
     eventService.getById(eventId).then((result) => {
       setEvent(result);
+    });
+    attendService.getAttendantsCount(eventId).then((result) => {
+      setAttends(result);
     });
   }, [eventId]);
 
@@ -31,6 +39,17 @@ export const EventDetails = ({ onDeleteEventSubmit }) => {
       await onDeleteEventSubmit(eventId);
     }
   };
+
+  const onAttendClick = async () => {
+    await attend(eventId);
+    setAttends(attends + 1);
+    setAttending(true);
+
+    // setAttends(attends + (isAttending ? -1 : 1));
+    // setAttending(!isAttending);
+  };
+
+  // TODO: implement on not attend
 
   return (
     //TODO refine details page
@@ -55,9 +74,9 @@ export const EventDetails = ({ onDeleteEventSubmit }) => {
                   <p>date: {event.date}</p>
                   <p>site: {event.site}</p>
                   <p>
-                    free places left:{' '}
+                    guests:{' '}
                     <span className="badge bg-design rounded-pill ms-auto">
-                      {event.maxGuests}
+                      {attends}
                     </span>{' '}
                   </p>
                 </div>
@@ -85,8 +104,13 @@ export const EventDetails = ({ onDeleteEventSubmit }) => {
               )}
               {canAttend && (
                 <div className={styles.ownerButtons}>
-                  <button type="button" className="btn btn-info">
-                    Attend Event
+                  <button
+                    type="button"
+                    className={isAttending ? 'btn btn-success' : 'btn btn-info'}
+                    onClick={onAttendClick}
+                    disabled={isAttending}
+                  >
+                    {isAttending ? <>You are Attending</> : <>Attend Event</>}
                   </button>
                 </div>
               )}

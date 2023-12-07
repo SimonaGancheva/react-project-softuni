@@ -15,7 +15,7 @@ export const Logout = () => {
       .catch(() => {
         onLogout();
       });
-  }, []);
+  }, [onLogout]);
 
   return <Navigate to="/login" />;
 };

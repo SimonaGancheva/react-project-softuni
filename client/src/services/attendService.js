@@ -1,30 +1,19 @@
 import * as request from './requester';
 
 const endpoints = {
-  allAttendants: '/data/attendants',
-  byEventId: '/data/events/',
-  addAttendant: '/data/events',
+  attend: '/data/going',
+  attendantsByEventId: (eventId) => `/data/going?where=eventId%3D%22${eventId}%22&distinct=_ownerId&count`,
+  attendanceByUser: (eventId, userId) => `/data/going?where=eventId%3D%22${eventId}%22%20and%20_ownerId%3D%22${userId}%22&count`,
 };
 
-export const getAll = async () => {
-  const result = await request.get(endpoints.allEvents);
-  const events = Object.values(result);
+export const attend = async (eventId) => {
+  return request.post(endpoints.attend, {eventId});
+}
 
-  return events;
-};
+export const getAttendantsCount = async (eventId) => {
+  return request.get(endpoints.attendantsByEventId(eventId));
+}
 
-export const getById = async (eventId) => {
-  return await request.get(endpoints.byId + eventId);
-};
-
-export const create = async (data) => {
-  return await request.post(endpoints.addEvent, data);
-};
-
-export const deleteById = async (eventId) => {
-  return await request.del(endpoints.byId + eventId);
-};
-
-export const edit = async (eventId, data) => {
-  return await request.put(endpoints.byId + eventId, data);
+export const getOwnAttendance = async (eventId, userId) => {
+  return request.get(endpoints.attendanceByUser(eventId, userId)); // 0 or 1
 }

@@ -1,4 +1,3 @@
-import { clearUserData, setUserData } from '../utils/util';
 import * as request from './requester';
 
 const endpoints = {

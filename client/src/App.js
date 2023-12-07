@@ -1,7 +1,4 @@
-
 import { Routes, Route } from 'react-router-dom';
-
-
 
 import { AuthProvider } from './contexts/AuthContext';
 import { Catalog } from './components/Catalog/Catalog';
@@ -17,6 +14,7 @@ import { Logout } from './components/Logout/Logout';
 import { UserProfile } from './components/UserProfile/UserProfile';
 import { EditEvent } from './components/EditEvent/EditEvent';
 import { EventProvider } from './contexts/EventContext';
+import { AttendProvider } from './contexts/AttendContext';
 
 function App() {
   return (
@@ -27,7 +25,7 @@ function App() {
 
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/catalog" element={<Catalog/>} />
+            <Route path="/catalog" element={<Catalog />} />
             <Route path="/catalog/:eventId" element={<EventDetails />} />
             <Route path="/catalog/:eventId/edit" element={<EditEvent />} />
             <Route path="/contacts" element={<Contacts />} />

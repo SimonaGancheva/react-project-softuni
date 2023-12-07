@@ -13,7 +13,7 @@ export const AuthProvider = ({ children }) => {
 
   const onLoginSubmit = async (data) => {
     const { email, password } = data;
-    if (email == '' || password == '') {
+    if (email === '' || password === '') {
       return alert('All fields are required!');
     }
     const result = await authService.login(email, password);
@@ -42,7 +42,8 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const onLogout = () => {
+  const onLogout =  () => {
+    // await authService.logout()
     setUser({});
     clearUserData();
   };
