@@ -1343,7 +1343,9 @@
                 "maxGuests": 20,
                 "summary": "What will be the future of programming? Will new engeneers be needed?",
                 "imageUrl": "https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/advisor/wp-content/uploads/2023/07/computer-coding.jpg",
-                "_id": "c32741f2-4d95-4c4f-a4fa-293ee7dd6d8f"
+                "_id": "c32741f2-4d95-4c4f-a4fa-293ee7dd6d8f",
+                "_ownerId": "35c62d76-8152-4626-8712-eeb96381bea8",
+                "_createdOn": 1702045739615,
               },
               "f787bd8d-a2ad-4e27-8c71-a7f8033100a0": {
                 "title": "History of Architecture",
@@ -1353,7 +1355,8 @@
                 "maxGuests": 50,
                 "summary": "The history of architecture will be discussed",
                 "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/%CE%9D%CE%B1%CF%8C%CF%82_%CF%84%CE%BF%CF%85_%CE%97%CF%86%CE%B1%CE%AF%CF%83%CF%84%CE%BF%CF%85.jpg/383px-%CE%9D%CE%B1%CF%8C%CF%82_%CF%84%CE%BF%CF%85_%CE%97%CF%86%CE%B1%CE%AF%CF%83%CF%84%CE%BF%CF%85.jpg",
-                "_id": "f787bd8d-a2ad-4e27-8c71-a7f8033100a0"
+                "_id": "f787bd8d-a2ad-4e27-8c71-a7f8033100a0",
+                "_createdOn": 1519129864400,
               },
               "7353f353-e5eb-4137-8b10-bfb649ebf376": {
                 "title": "Fashion trends spring/summer 2024",
@@ -1363,7 +1366,9 @@
                 "maxGuests": 100,
                 "summary": "Which colors and patterns will we be seeing in stores?",
                 "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbERJSbn_5Rj2MoB0ZUin9A37uvk_tVpA8UA&usqp=CAU",
-                "_id": "7353f353-e5eb-4137-8b10-bfb649ebf376"
+                "_id": "7353f353-e5eb-4137-8b10-bfb649ebf376",
+                "_ownerId": "35c62d76-8152-4626-8712-eeb96381bea8",
+                "_createdOn": 1702045739615
               }
         },
         comments: {

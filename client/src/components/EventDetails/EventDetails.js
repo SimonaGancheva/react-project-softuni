@@ -25,9 +25,9 @@ export const EventDetails = ({ onDeleteEventSubmit }) => {
     eventService.getById(eventId).then((result) => {
       setEvent(result);
     });
-    attendService.getAttendantsCount(eventId).then((result) => {
-      setAttends(result);
-    });
+    // attendService.getAttendantsCount(eventId).then((result) => {
+    //   setAttends(result);
+    // });
   }, [eventId]);
 
   const onDeleteClick = async () => {

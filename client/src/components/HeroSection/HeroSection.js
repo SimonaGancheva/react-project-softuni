@@ -13,7 +13,9 @@ export const HeroSection = () => {
                 platform for virtual and on-site events
               </h6>
 
-              <form
+              {/* TODO: implement search */}
+
+              {/* <form
                 method="get"
                 className="custom-form mt-4 pt-2 mb-lg-0 mb-5"
                 role="search"
@@ -37,7 +39,7 @@ export const HeroSection = () => {
                     Search
                   </button>
                 </div>
-              </form>
+              </form> */}
             </div>
           </div>
         </div>

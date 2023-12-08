@@ -1,10 +1,45 @@
-export const Featured = () => {
-    return (
-         <section className="featured-section">
-                <div className="container">
-                    <div className="row justify-content-center">
+import { useContext } from 'react';
+import { Link } from 'react-router-dom';
 
-                        <div className="col-lg-4 col-12 mb-4 mb-lg-0">
+import { EventCard } from '../EventCard/EventCard';
+import { EventContext } from '../../contexts/EventContext';
+
+
+import styles from './Featured.module.css';
+
+export const Featured = () => {
+  const { events } = useContext(EventContext);
+
+  const latestEvents = events.slice(0, 3);
+  return (
+    <section className="featured-section">
+      
+
+      <div className="container">
+        <div className={styles.featuredWrapper}>
+
+          <div className="row">
+            <div className="col-12">
+              <div className="row">
+                {latestEvents.map((x) => (
+                  <EventCard key={x._id} {...x} />
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="container">
+        <div className="row">
+        <div className={styles.featuredWrapper}>
+          <div className="col-12 text-center">
+            <h4 className="mb-4"><Link to={'/catalog'}>Discover more here!</Link></h4>
+          </div>
+          </div>
+        </div>
+      </div>
+
+      {/* <div className="col-lg-4 col-12 mb-4 mb-lg-0">
                             <div className="custom-block bg-white shadow-lg">
                                 <a href="topics-detail.html">
                                     <div className="d-flex">
@@ -62,10 +97,7 @@ export const Featured = () => {
                                     <div className="section-overlay"></div>
                                 </div>
                             </div>
-                        </div>
-
-                    </div>
-                </div>
-            </section>
-    )
-}
+                        </div> */}
+    </section>
+  );
+};
