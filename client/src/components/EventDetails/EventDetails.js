@@ -7,7 +7,6 @@ import * as attendService from '../../services/attendService';
 import { AuthContext } from '../../contexts/AuthContext';
 
 import styles from './EventDetails.module.css';
-import { attend } from '../../services/attendService';
 
 export const EventDetails = ({ onDeleteEventSubmit }) => {
   const { userId, isAuthenticated } = useContext(AuthContext);
@@ -15,20 +14,29 @@ export const EventDetails = ({ onDeleteEventSubmit }) => {
   const { eventId } = useParams();
 
   const [event, setEvent] = useState([]);
-  const [attends, setAttends] = useState(0);
+  const [attends, setAttends] = useState([]);
   const [isAttending, setAttending] = useState(false);
 
   const isOwner = isAuthenticated && userId === event._ownerId;
   const canAttend = isAuthenticated && !isOwner && userId;
 
   useEffect(() => {
-    eventService.getById(eventId).then((result) => {
-      setEvent(result);
+    Promise.all([
+      eventService.getById(eventId),
+      attendService.getAttendantsCount(eventId),
+    ]).then(([eventData, attendsData]) => {
+      console.log(attendsData);
+      setAttends(attendsData);
+      setEvent(eventData);
+
+      attendsData.forEach((x) => {
+        if (x._ownerId === userId) {
+          setAttending(true);
+          return;
+        }
+      });
     });
-    // attendService.getAttendantsCount(eventId).then((result) => {
-    //   setAttends(result);
-    // });
-  }, [eventId]);
+  }, [eventId, userId]);
 
   const onDeleteClick = async () => {
     const choice = window.confirm(
@@ -41,8 +49,9 @@ export const EventDetails = ({ onDeleteEventSubmit }) => {
   };
 
   const onAttendClick = async () => {
-    await attend(eventId);
-    setAttends(attends + 1);
+    const newAttend = await attendService.attend(eventId);
+    setAttends((attends) => [...attends, newAttend]);
+
     setAttending(true);
 
     // setAttends(attends + (isAttending ? -1 : 1));
@@ -76,7 +85,7 @@ export const EventDetails = ({ onDeleteEventSubmit }) => {
                   <p>
                     guests:{' '}
                     <span className="badge bg-design rounded-pill ms-auto">
-                      {attends}
+                      {attends.length}
                     </span>{' '}
                   </p>
                 </div>

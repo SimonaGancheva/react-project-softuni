@@ -2,7 +2,7 @@ import * as request from './requester';
 
 const endpoints = {
   attend: '/data/going',
-  attendantsByEventId: (eventId) => `/data/going?where=eventId%3D%22${eventId}%22&distinct=_ownerId&count`,
+  attendantsByEventId: (eventId) => `/data/going?where=eventId%3D%22${eventId}%22`,
   attendanceByUser: (eventId, userId) => `/data/going?where=eventId%3D%22${eventId}%22%20and%20_ownerId%3D%22${userId}%22&count`,
 };
 
