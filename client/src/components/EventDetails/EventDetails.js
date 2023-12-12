@@ -7,9 +7,11 @@ import * as attendService from '../../services/attendService';
 import { AuthContext } from '../../contexts/AuthContext';
 
 import styles from './EventDetails.module.css';
+import { EventContext } from '../../contexts/EventContext';
 
-export const EventDetails = ({ onDeleteEventSubmit }) => {
+export const EventDetails = () => {
   const { userId, isAuthenticated } = useContext(AuthContext);
+  const {onDeleteEventSubmit} = useContext(EventContext);
 
   const { eventId } = useParams();
 
