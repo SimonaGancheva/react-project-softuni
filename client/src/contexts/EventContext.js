@@ -10,7 +10,7 @@ export const EventProvider = ({ children }) => {
 
   useEffect(() => {
     eventService.getAll().then((result) => {
-      console.log(result);
+      // console.log(result);
       setEvents(result);
     });
   }, []);
@@ -35,11 +35,17 @@ export const EventProvider = ({ children }) => {
     navigate('/catalog');
   };
 
+  const getEvent = async (eventId) => {
+    const event = eventService.getById(eventId);
+    return event;
+  }
+
   const contextData = {
     events,
     onCreateEventSubmit,
     onEditEventSubmit,
     onDeleteEventSubmit,
+    getEvent,
   };
 
   return (

@@ -25,7 +25,7 @@ export const EventDetails = ({ onDeleteEventSubmit }) => {
       eventService.getById(eventId),
       attendService.getAttendantsCount(eventId),
     ]).then(([eventData, attendsData]) => {
-      console.log(attendsData);
+      
       setAttends(attendsData);
       setEvent(eventData);
 
@@ -35,7 +35,10 @@ export const EventDetails = ({ onDeleteEventSubmit }) => {
           return;
         }
       });
-    });
+    })
+    .catch(err => {
+      console.log(err);
+    })
   }, [eventId, userId]);
 
   const onDeleteClick = async () => {

@@ -2,6 +2,8 @@ import { useContext } from 'react';
 import { EventCard } from '../EventCard/EventCard';
 import { EventContext } from '../../contexts/EventContext';
 
+import styles from './Catalog.module.css';
+
 export const Catalog = () => {
   const { events } = useContext(EventContext);
   return (
@@ -19,6 +21,7 @@ export const Catalog = () => {
           <div className="col-12">
             <div className="tab-content" id="myTabContent">
               <div className="row">
+                {!events.length && <div className={styles.noEvents}>No Events Added Yet :(</div> }
                 {events.map((x) => (
                   <EventCard key={x._id} {...x} />
                 ))}

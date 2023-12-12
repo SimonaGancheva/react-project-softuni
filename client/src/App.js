@@ -15,11 +15,15 @@ import { UserProfile } from './components/UserProfile/UserProfile';
 import { EditEvent } from './components/EditEvent/EditEvent';
 import { EventProvider } from './contexts/EventContext';
 import { AttendProvider } from './contexts/AttendContext';
+import { AuthGuard } from './components/Guards/AuthGuard';
+import { NotFound } from './components/NotFound/NotFound';
+import { PublicGuard } from './components/Guards/PublicGuard';
+import { EventOwner } from './components/Guards/EventOwner';
 
 function App() {
   return (
-    <EventProvider>
-      <AuthProvider>
+    <AuthProvider>
+      <EventProvider>
         <main>
           <Navigation />
 
@@ -27,13 +31,30 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/catalog" element={<Catalog />} />
             <Route path="/catalog/:eventId" element={<EventDetails />} />
-            <Route path="/catalog/:eventId/edit" element={<EditEvent />} />
             <Route path="/contacts" element={<Contacts />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/profile" element={<UserProfile />} />
-            <Route path="/logout" element={<Logout />} />
-            <Route path="/create" element={<CreateEvent />} />
+
+            <Route element={<PublicGuard />}>
+              <Route path="/register" element={<Register />} />
+              <Route path="/login" element={<Login />} />
+            </Route>
+
+            <Route element={<AuthGuard />}>
+              <Route path="/logout" element={<Logout />} />
+              <Route path="/create" element={<CreateEvent />} />
+
+              <Route
+                path="/catalog/:eventId/edit"
+                element={
+                  <EventOwner>
+                    <EditEvent />
+                  </EventOwner>
+                }
+              />
+
+              <Route path="/profile" element={<UserProfile />} />
+            </Route>
+
+            <Route path="*" element={<NotFound />} />
           </Routes>
 
           {/* <section className="faq-section section-padding" id="section_4">
@@ -102,8 +123,8 @@ function App() {
         </main>
 
         <Footer />
-      </AuthProvider>
-    </EventProvider>
+      </EventProvider>
+    </AuthProvider>
   );
 }
 

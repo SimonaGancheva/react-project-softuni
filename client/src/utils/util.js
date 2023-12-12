@@ -9,7 +9,7 @@ export const setUserData = (data) => {
 }
 
 export const clearUserData = () => {
-    localStorage.removeItem(itemName);
+    return localStorage.removeItem(itemName);
 }
 
 // export const createSubmitHandler = (callback) => {

@@ -1371,7 +1371,7 @@
                 "_createdOn": 1702045739615
               }
         },
-        comments: {
+        going: {
         
         }
     };
