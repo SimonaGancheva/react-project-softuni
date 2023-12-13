@@ -1,4 +1,30 @@
 .ownerButtons {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
 }
+
+.imgHeight {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  object-fit: cover;
+  margin-top: 35px;
+}
+
+.guestsInfo {
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  font-weight: 700;
+  width: 170px;
+  height: 60px;
+  
+  margin-left: auto;
+  background-color: #00B0FF;
+  font-size:larger;
+}
+
+

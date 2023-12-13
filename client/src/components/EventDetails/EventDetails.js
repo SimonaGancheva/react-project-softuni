@@ -20,9 +20,11 @@ export const EventDetails = () => {
   const [event, setEvent] = useState([]);
   const [attends, setAttends] = useState([]);
   const [isAttending, setAttending] = useState(false);
+  
 
   const isOwner = isAuthenticated && userId === event._ownerId;
   const canAttend = isAuthenticated && !isOwner && userId;
+  const isFull = attends.length >= event.maxGuests;
 
   useEffect(() => {
     Promise.all([
@@ -57,10 +59,11 @@ export const EventDetails = () => {
 
   const onAttendClick = async () => {
     const newAttend = await attendService.attend(eventId);
-    setAttends((attends) => [...attends, newAttend]);
-    await getUserAttendings()
+    setAttends((state) => [...state, newAttend]);
+    await getUserAttendings();
 
     setAttending(true);
+    
 
     // setAttends(attends + (isAttending ? -1 : 1));
     // setAttending(!isAttending);
@@ -70,8 +73,84 @@ export const EventDetails = () => {
 
   return (
     //TODO refine details page
-    <>
-      <section
+
+    <section
+      className="topics-detail-section section-padding"
+      id="topics-detail"
+    >
+      <div className="container">
+        <div className="row">
+          <div className="col-lg-8 col-12 m-auto">
+            <div className="custom-block bg-white shadow-lg">
+              <div className="d-flex">
+                <div>
+                  <h5 className="mb-2">{event.title}</h5>
+
+                  <p className="mb-0"> {event.category}</p>
+                  <hr/>
+                  <p className="mb-0"> {event.summary}</p>
+                  <p className="mb-0">
+                    <strong>date:</strong> {event.date}
+                  </p>
+                  <p className="mb-0">
+                    <strong>site:</strong> {event.site}
+                  </p>
+                </div>
+
+                {/* TODO: show free space left */}
+                <span 
+                // className="badge bg-design rounded-pill ms-auto"
+                className={styles.guestsInfo}
+                >
+                Going: {attends.length}   <br/>
+                Max. guests: {event.maxGuests} 
+                </span>
+              </div>
+
+              {canAttend && (
+                <div className={styles.ownerButtons}>
+                  <button
+                    type="button"
+                    className={isAttending ? 'btn btn-success' : 'btn btn-info'}
+                    onClick={onAttendClick}
+                    disabled={isAttending || isFull}
+                  >
+                    {isAttending ? <>You are Attending</> : <>Attend Event</>}
+                  </button>
+                </div>
+              )}
+
+              <img
+                src={event.imageUrl}
+                // className="custom-block-image img-fluid"
+                className={styles.imgHeight}
+                alt={event.title}
+              />
+
+              {isOwner && (
+                <div className={styles.ownerButtons}>
+                  <button type="button" className="btn btn-warning">
+                    <Link to={`/catalog/${event._id}/edit`}>Edit Event</Link>
+                  </button>
+                  <button
+                    type="button"
+                    className="btn btn-danger"
+                    onClick={onDeleteClick}
+                  >
+                    Delete Event
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+{
+  /* <section
         className="topics-detail-section section-padding"
         id="topics-detail"
       >
@@ -82,9 +161,7 @@ export const EventDetails = () => {
 
               <p>{event.summary}</p>
 
-              {/* <blockquote>
-                                Freelancing your skills isn't going to make you a millionaire overnight.
-                            </blockquote> */}
+              
 
               <div className="row my-4">
                 <div className="col-lg-6 col-md-6 col-12">
@@ -134,49 +211,5 @@ export const EventDetails = () => {
             </div>
           </div>
         </div>
-      </section>
-
-      <section className="section-padding section-bg">
-        <div className="container">
-          <div className="row justify-content-center">
-            <div className="col-lg-5 col-12">
-              <img
-                src="images/rear-view-young-college-student.jpg"
-                className="newsletter-image img-fluid"
-                alt=""
-              />
-            </div>
-
-            <div className="col-lg-5 col-12 subscribe-form-wrap d-flex justify-content-center align-items-center">
-              <form
-                className="custom-form subscribe-form"
-                action="#"
-                method="post"
-                role="form"
-              >
-                <h4 className="mb-4 pb-2">Are you interested?</h4>
-                <p>Register for this event with your email now!</p>
-
-                <input
-                  type="email"
-                  name="subscribe-email"
-                  id="subscribe-email"
-                  pattern="[^ @]*@[^ @]*"
-                  className="form-control"
-                  placeholder="Email Address"
-                  required=""
-                />
-
-                <div className="col-lg-12 col-12">
-                  <button type="submit" className="form-control">
-                    Attend
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </section>
-    </>
-  );
-};
+      </section> */
+}
