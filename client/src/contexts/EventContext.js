@@ -35,8 +35,9 @@ export const EventProvider = ({ children }) => {
     navigate('/catalog');
   };
 
-  const getEvent = async (eventId) => {
-    const event = eventService.getById(eventId);
+  const getEvent = (eventId) => {
+    // const event = eventService.getById(eventId);
+    const event = events.filter(x => x._id === eventId).shift();
     return event;
   }
 

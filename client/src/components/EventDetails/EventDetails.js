@@ -8,10 +8,12 @@ import { AuthContext } from '../../contexts/AuthContext';
 
 import styles from './EventDetails.module.css';
 import { EventContext } from '../../contexts/EventContext';
+import { AttendContext } from '../../contexts/AttendContext';
 
 export const EventDetails = () => {
   const { userId, isAuthenticated } = useContext(AuthContext);
-  const {onDeleteEventSubmit} = useContext(EventContext);
+  const { onDeleteEventSubmit } = useContext(EventContext);
+  const { getUserAttendings } = useContext(AttendContext);
 
   const { eventId } = useParams();
 
@@ -26,21 +28,21 @@ export const EventDetails = () => {
     Promise.all([
       eventService.getById(eventId),
       attendService.getAttendantsCount(eventId),
-    ]).then(([eventData, attendsData]) => {
-      
-      setAttends(attendsData);
-      setEvent(eventData);
+    ])
+      .then(([eventData, attendsData]) => {
+        setAttends(attendsData);
+        setEvent(eventData);
 
-      attendsData.forEach((x) => {
-        if (x._ownerId === userId) {
-          setAttending(true);
-          return;
-        }
+        attendsData.forEach((x) => {
+          if (x._ownerId === userId) {
+            setAttending(true);
+            return;
+          }
+        });
+      })
+      .catch((err) => {
+        console.log(err);
       });
-    })
-    .catch(err => {
-      console.log(err);
-    })
   }, [eventId, userId]);
 
   const onDeleteClick = async () => {
@@ -56,6 +58,7 @@ export const EventDetails = () => {
   const onAttendClick = async () => {
     const newAttend = await attendService.attend(eventId);
     setAttends((attends) => [...attends, newAttend]);
+    await getUserAttendings()
 
     setAttending(true);
 

@@ -6,39 +6,35 @@ import * as attendService from '../../services/attendService';
 import * as eventService from '../../services/eventService';
 
 import { EventCard } from '../EventCard/EventCard';
+import { AttendContext } from '../../contexts/AttendContext';
 
 export const UserProfile = () => {
+  const { getUserAttendings } = useContext(AttendContext);
   const { userId } = useContext(AuthContext);
-  const { events } = useContext(EventContext);
+  const { events, getEvent } = useContext(EventContext);
+
   const [userEvents, setUserEvents] = useState([]);
   const [userAttendings, setUserAttendings] = useState([]);
-  const [attendingsFullEvent, setAttendingsFullEvent] = useState([]);
-  let userAttendingData = [];
 
   useEffect(() => {
     const currUserEvents = events.filter((x) => x._ownerId === userId);
     setUserEvents(currUserEvents);
 
-    // const getData = async () => {
-    //   if (userId) {
-    //     const result = await attendService.getOwnAttendingEvents(userId);
-    //     console.log(result);
-    //     setUserAttendings(result);
-    //     console.log(userAttendings);
-    //   }
-    // };
-    // // TODO: show events user is attending here
-    // getData();
-    events.forEach((event) => {
-      userAttendings.forEach((el) => {
-        if (event._id === el.eventId) {
-          userAttendingData.push(event);
-        }
-      });
-    });
+    getUserAttendings(userId)
+      .then((result) => {
+        for (const el of result) {
+          const currEvent = getEvent(el.eventId);
 
-    console.log(userAttendingData);
-  }, [events]);
+          const currEventId = currEvent._id;
+          // console.log(currEventId);
+
+          setUserAttendings((state) =>
+            !state.includes(currEventId) ? [...state, currEvent] : state
+          );
+        }
+      })
+      .catch((err) => console.log(err));
+  }, [userId, events]);
 
   return (
     <section className="explore-section section-padding">
@@ -82,7 +78,7 @@ export const UserProfile = () => {
                 {/* TODO: show events the curr user is attending */}
 
                 {userAttendings.map((x) => (
-                  <EventCard key={x.eventId} {...x} />
+                  <EventCard key={x._id} {...x} />
                 ))}
               </div>
             </div>

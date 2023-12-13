@@ -24,6 +24,7 @@ function App() {
   return (
     <AuthProvider>
       <EventProvider>
+        <AttendProvider>
         <main>
           <Navigation />
 
@@ -123,6 +124,7 @@ function App() {
         </main>
 
         <Footer />
+        </AttendProvider>
       </EventProvider>
     </AuthProvider>
   );
