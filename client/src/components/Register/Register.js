@@ -50,7 +50,7 @@ export const Register = () => {
         testUsername: false,
       }));
     }
-  })
+  }, [values])
 
   const onEmailBlur = useCallback(() => {
     const rgx = /^(.+)@(.+)$/;

@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom';
-import { useContext } from 'react';
+import { useCallback, useContext, useState } from 'react';
 
-import styles from './Login.module.css';
 import { AuthContext } from '../../contexts/AuthContext';
 import { useForm } from '../../hooks/useForm';
+
+import styles from './Login.module.css';
 
 export const Login = () => {
   const { onLoginSubmit } = useContext(AuthContext);
@@ -16,6 +17,61 @@ export const Login = () => {
     initValues,
     onLoginSubmit
   );
+
+  const [errors, setErrors] = useState({
+    requiredEmail: false,
+    testEmail: false,
+    requiredPassword: false,
+    testPassword: false,
+});
+
+const onEmailBlur = useCallback(() => {
+  const rgx = /^(.+)@(.+)$/;
+
+  if (values.email === '') {
+    setErrors((state) => ({
+      ...state,
+      requiredEmail: true,
+      testEmail: false,
+    }));
+  } else if (!rgx.test(values.email)) {
+    setErrors((state) => ({
+      ...state,
+      requiredEmail: false,
+      testEmail: true,
+    }));
+  } else {
+    setErrors((state) => ({
+      ...state,
+      requiredEmail: false,
+      testEmail: false,
+    }));
+  }
+}, [values]);
+
+
+const onPasswordBlur = useCallback(() => {
+  if (values.password === '') {
+    setErrors((state) => ({
+      ...state,
+      requiredPassword: true,
+      testPassword: false,
+    }));
+  } else if (values.password.length < 4) {
+    setErrors((state) => ({
+      ...state,
+      requiredPassword: false,
+      testPassword: true,
+    }));
+  } else {
+    setErrors((state) => ({
+      ...state,
+      requiredPassword: false,
+      testPassword: false,
+    }));
+  }
+}, [values]);
+
 
   return (
     <section className="section-padding section-bg">
@@ -36,6 +92,14 @@ export const Login = () => {
                 <div className="row">
                   {/* Email */}
                   <div className="col-lg-12 col-md-6 col-12">
+                  {errors.requiredEmail && (
+                      <span className={styles.errors}>
+                        This field is required!
+                      </span>
+                    )}
+                    {errors.testEmail && (
+                      <span className={styles.errors}>Enter valid email!</span>
+                    )}
                     <div className="form-floating">
                       <input
                         value={values.email}
@@ -45,8 +109,7 @@ export const Login = () => {
                         id="email"
                         className="form-control"
                         placeholder="Email"
-                        pattern="[^ @]*@[^ @]*"
-                        required=""
+                        onBlur={onEmailBlur}
                       />
 
                       <label htmlFor="floatingInput">Email</label>
@@ -55,6 +118,17 @@ export const Login = () => {
 
                   {/* Password */}
                   <div className="col-lg-12 col-md-6 col-12">
+                  {errors.requiredPassword && (
+                      <span className={styles.errors}>
+                        This field is required!
+                      </span>
+                    )}
+
+                    {errors.testPassword && (
+                      <span className={styles.errors}>
+                        Password must be at least 4 characters long!
+                      </span>
+                    )}
                     <div className="form-floating">
                       <input
                         value={values.password}
@@ -64,7 +138,7 @@ export const Login = () => {
                         id="password"
                         className="form-control"
                         placeholder="Password"
-                        required=""
+                        onBlur={onPasswordBlur}
                       />
 
                       <label htmlFor="floatingInput">Password</label>
