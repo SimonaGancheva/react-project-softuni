@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { useContext } from 'react';
+import { useCallback, useContext, useState } from 'react';
 
 import styles from './Register.module.css';
 import { AuthContext } from '../../contexts/AuthContext';
@@ -18,6 +18,108 @@ export const Register = () => {
     initValues,
     onRegisterSubmit
   );
+
+  const [errors, setErrors] = useState({
+    requiredUsername: false,
+    testUsername: false,
+    requiredEmail: false,
+    testEmail: false,
+    requiredPassword: false,
+    testPassword: false,
+    requiredRepeatPassword: false,
+    testRepeatPassword: false,
+  });
+
+  const onUsernameBlur = useCallback(() => {
+    if (values.username === '') {
+      setErrors((state) => ({
+        ...state,
+        requiredUsername: true,
+        testUsername: false,
+      }));
+    } else if (values.username.length < 3) {
+      setErrors((state) => ({
+        ...state,
+        requiredUsername: false,
+        testUsername: true,
+      }));
+    } else {
+      setErrors((state) => ({
+        ...state,
+        requiredUsername: false,
+        testUsername: false,
+      }));
+    }
+  })
+
+  const onEmailBlur = useCallback(() => {
+    const rgx = /^(.+)@(.+)$/;
+
+    if (values.email === '') {
+      setErrors((state) => ({
+        ...state,
+        requiredEmail: true,
+        testEmail: false,
+      }));
+    } else if (!rgx.test(values.email)) {
+      setErrors((state) => ({
+        ...state,
+        requiredEmail: false,
+        testEmail: true,
+      }));
+    } else {
+      setErrors((state) => ({
+        ...state,
+        requiredEmail: false,
+        testEmail: false,
+      }));
+    }
+  }, [values]);
+
+  const onPasswordBlur = useCallback(() => {
+    if (values.password === '') {
+      setErrors((state) => ({
+        ...state,
+        requiredPassword: true,
+        testPassword: false,
+      }));
+    } else if (values.password.length < 4) {
+      setErrors((state) => ({
+        ...state,
+        requiredPassword: false,
+        testPassword: true,
+      }));
+    } else {
+      setErrors((state) => ({
+        ...state,
+        requiredPassword: false,
+        testPassword: false,
+      }));
+    }
+  }, [values]);
+
+  const onRepeatPasswordBlur = useCallback(() => {
+    if (values.repass === '') {
+      setErrors((state) => ({
+        ...state,
+        requiredRepeatPassword: true,
+        testRepeatPassword: false,
+      }));
+    } else if (values.password !== values.repass) {
+      setErrors((state) => ({
+        ...state,
+        requiredRepeatPassword: false,
+        testRepeatPassword: true,
+      }));
+    } else {
+      setErrors((state) => ({
+        ...state,
+        requiredRepeatPassword: false,
+        testRepeatPassword: false,
+      }));
+    }
+  }, [values]);
+
   return (
     <section className="section-padding section-bg">
       <div className="container">
@@ -37,6 +139,14 @@ export const Register = () => {
                 <div className="row">
                   {/* Username */}
                   <div className="col-lg-12 col-md-6 col-12">
+                  {errors.requiredUsername && (
+                      <span className={styles.errors}>
+                        This field is required!
+                      </span>
+                    )}
+                    {errors.testUsername && (
+                      <span className={styles.errors}>Username must be at least 3 characters long!</span>
+                    )}
                     <div className="form-floating">
                       <input
                         value={values.username}
@@ -46,7 +156,7 @@ export const Register = () => {
                         id="username"
                         className="form-control"
                         placeholder="Username"
-                        required=""
+                        onBlur={onUsernameBlur}
                       />
 
                       <label htmlFor="floatingInput">Username</label>
@@ -54,6 +164,14 @@ export const Register = () => {
                   </div>
                   {/* Email */}
                   <div className="col-lg-12 col-md-6 col-12">
+                    {errors.requiredEmail && (
+                      <span className={styles.errors}>
+                        This field is required!
+                      </span>
+                    )}
+                    {errors.testEmail && (
+                      <span className={styles.errors}>Enter valid email!</span>
+                    )}
                     <div className="form-floating">
                       <input
                         value={values.email}
@@ -63,8 +181,7 @@ export const Register = () => {
                         id="email"
                         className="form-control"
                         placeholder="Email"
-                        pattern="[^ @]*@[^ @]*"
-                        required=""
+                        onBlur={onEmailBlur}
                       />
 
                       <label htmlFor="floatingInput">Email</label>
@@ -73,6 +190,17 @@ export const Register = () => {
 
                   {/* Password */}
                   <div className="col-lg-12 col-md-6 col-12">
+                    {errors.requiredPassword && (
+                      <span className={styles.errors}>
+                        This field is required!
+                      </span>
+                    )}
+
+                    {errors.testPassword && (
+                      <span className={styles.errors}>
+                        Password must be at least 4 characters long!
+                      </span>
+                    )}
                     <div className="form-floating">
                       <input
                         value={values.password}
@@ -82,7 +210,7 @@ export const Register = () => {
                         id="password"
                         className="form-control"
                         placeholder="Password"
-                        required=""
+                        onBlur={onPasswordBlur}
                       />
 
                       <label htmlFor="floatingInput">Password</label>
@@ -91,6 +219,16 @@ export const Register = () => {
 
                   {/* Repass */}
                   <div className="col-lg-12 col-md-6 col-12">
+                    {errors.requiredRepeatPassword && (
+                      <span className={styles.errors}>
+                        This field is required!
+                      </span>
+                    )}
+                    {errors.testRepeatPassword && (
+                      <span className={styles.errors}>
+                        Passwords don't match!
+                      </span>
+                    )}
                     <div className="form-floating">
                       <input
                         value={values.repass}
@@ -100,7 +238,7 @@ export const Register = () => {
                         id="repass"
                         className="form-control"
                         placeholder="Repeat Password"
-                        required=""
+                        onBlur={onRepeatPasswordBlur}
                       />
 
                       <label htmlFor="floatingInput">Repeat Password</label>

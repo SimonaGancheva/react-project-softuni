@@ -7,7 +7,7 @@ export const useForm = (initValues, onSubmitHandler) => {
 
 
   const onChangeHandler = (e) => {
-    setValues((state) => ({ ...state, [e.target.name]: e.target.value || e.target.checked  }));
+    setValues((state) => ({ ...state, [e.target.name]: e.target.value   }));
   };
 
   const onSubmit = (e) => {
