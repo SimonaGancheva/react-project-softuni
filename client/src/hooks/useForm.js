@@ -1,10 +1,13 @@
 import { useState } from 'react';
 
 export const useForm = (initValues, onSubmitHandler) => {
+  
   const [values, setValues] = useState(initValues);
 
+
+
   const onChangeHandler = (e) => {
-    setValues((state) => ({ ...state, [e.target.name]: e.target.value }));
+    setValues((state) => ({ ...state, [e.target.name]: e.target.value || e.target.checked  }));
   };
 
   const onSubmit = (e) => {

@@ -1,10 +1,21 @@
 .map-style {
-    border: 0;
+  border: 0;
 }
 
 .rowAlign {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.categoryGroup {
+  display: flex;
+  /* margin-top: 20px; */
+  background-color: white;
+  border: 1px solid #ced4da;
+  padding: 15px 20px;
+  margin-bottom: 20px;
+  justify-content: space-between;
+  border-radius: 100px
 }

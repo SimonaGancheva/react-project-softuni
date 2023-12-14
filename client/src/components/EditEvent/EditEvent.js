@@ -67,23 +67,81 @@ export const EditEvent = () => {
 
                   <div className="col-lg-12 col-md-6 col-12">
                     <div className="form-floating">
-                      <select
-                        value={values.category}
-                        onChange={onChangeHandler}
-                        id="floatingInput"
-                        name="floatingInput"
-                        className="form-control"
-                        placeholder="Category"
-                        required=""
-                      >
-                        {/* <option hidden disabled selected value></option> */}
-                        <option value="it">IT</option>
-                        <option value="marketing">Marketing</option>
-                        <option value="entertainment">Entertainment</option>
-                        <option value="art-and-culture">Art and Culture</option>
-                      </select>
+                     <div  name="floatingInput" className={styles.categoryGroup}>
+                    <label htmlFor="floatingInput">Category</label>
+                     <div className="form-check">
+                        <input
+                          className="form-check-input"
+                          type="radio"
+                          name="category"
+                          id="it"
+                          value="IT"
+                          onChange={onChangeHandler}
+                          checked={values.category === 'IT'}
+                        />
+                        <label
+                          className="form-check-label"
+                          htmlFor="it"
+                        >
+                          IT
+                        </label>
+                      </div>
+                      <div className="form-check">
+                        <input
+                          className="form-check-input"
+                          type="radio"
+                          name="category"
+                          id="marketing"
+                          value="Marketing"
+                          onChange={onChangeHandler}
+                          checked={values.category === 'Marketing'}
+                        />
+                        <label
+                          className="form-check-label"
+                          htmlFor="marketing"
+                        >
+                          Marketing
+                        </label>
+                      </div>
 
-                      <label htmlFor="floatingInput">Category</label>
+                      <div className="form-check">
+                        <input
+                          className="form-check-input"
+                          type="radio"
+                          name="category"
+                          id="entertainment"
+                          value="Entertainment"
+                          onChange={onChangeHandler}
+                          checked={values.category === 'Entertainment'}
+                        />
+                        <label
+                          className="form-check-label"
+                          htmlFor="entertainment"
+                        >
+                          Entertainment
+                        </label>
+                      </div>
+
+                      <div className="form-check">
+                        <input
+                          className="form-check-input"
+                          type="radio"
+                          name="category"
+                          id="art"
+                          value="Art"
+                          onChange={onChangeHandler}
+                          checked={values.category === 'Art and Culture'}
+                        />
+                        <label
+                          className="form-check-label"
+                          htmlFor="art"
+                        >
+                          Art and Culture
+                        </label>
+                      </div>
+                     </div>
+
+                      
                     </div>
                   </div>
 
