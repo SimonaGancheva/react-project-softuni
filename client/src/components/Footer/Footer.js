@@ -106,7 +106,7 @@ export const Footer = () => {
               <br />
               Design:{' '}
               <a rel="nofollow" href="https://templatemo.com" target="_blank">
-                TemplateMo
+                TemplateMo and Simona Gancheva
               </a>
             </p>
           </div>
