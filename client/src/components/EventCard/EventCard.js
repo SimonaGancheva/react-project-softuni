@@ -13,7 +13,7 @@ export const EventCard = ({ _id, title, imageUrl, date, site, maxGuests }) => {
               <p className="mb-0">site: {site}</p>
             </div>
 
-            {/* TODO: show free space left */}
+            
             <span className="badge bg-design rounded-pill ms-auto">
               {maxGuests}
             </span>

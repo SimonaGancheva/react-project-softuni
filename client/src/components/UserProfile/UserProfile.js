@@ -75,7 +75,7 @@ export const UserProfile = () => {
           <div className="col-12">
             <div className="tab-content" id="myTabContent">
               <div className="row">
-                {/* TODO: show events the curr user is attending */}
+                
 
                 {userAttendings.map((x) => (
                   <EventCard key={x._id} {...x} />

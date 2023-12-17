@@ -56,7 +56,7 @@ export const AuthProvider = ({ children }) => {
     clearUserData();
   };
 
-  //TODO: check for token in localStorage!
+  
   const isAuthenticated = !!user.accessToken;
 
   const contextData = {

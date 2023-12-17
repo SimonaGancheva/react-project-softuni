@@ -69,10 +69,10 @@ export const EventDetails = () => {
     // setAttending(!isAttending);
   };
 
-  // TODO: implement on not attend
+  
 
   return (
-    //TODO refine details page
+    
 
     <section
       className="topics-detail-section section-padding"
@@ -97,7 +97,7 @@ export const EventDetails = () => {
                   </p>
                 </div>
 
-                {/* TODO: show free space left */}
+                
                 <span 
                 // className="badge bg-design rounded-pill ms-auto"
                 className={styles.guestsInfo}
