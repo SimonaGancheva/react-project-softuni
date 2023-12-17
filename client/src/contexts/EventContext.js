@@ -41,12 +41,19 @@ export const EventProvider = ({ children }) => {
     return event;
   }
 
+  const onCategoryClick = async (category) => {
+    const result = await eventService.getAllByCategory(category);
+
+    setEvents(result)
+  }
+
   const contextData = {
     events,
     onCreateEventSubmit,
     onEditEventSubmit,
     onDeleteEventSubmit,
     getEvent,
+    onCategoryClick,
   };
 
   return (

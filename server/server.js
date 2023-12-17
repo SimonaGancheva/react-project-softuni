@@ -1349,7 +1349,7 @@
               },
               "f787bd8d-a2ad-4e27-8c71-a7f8033100a0": {
                 "title": "History of Architecture",
-                "category": "Architecture",
+                "category": "Art",
                 "site": "Sofia",
                 "date": "2024-1-18",
                 "maxGuests": 50,
@@ -1360,7 +1360,7 @@
               },
               "7353f353-e5eb-4137-8b10-bfb649ebf376": {
                 "title": "Fashion trends spring/summer 2024",
-                "category": "Fashion",
+                "category": "Art",
                 "site": "Plovdiv",
                 "date": "2024-2-22",
                 "maxGuests": 100,

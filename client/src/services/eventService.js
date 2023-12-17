@@ -2,6 +2,8 @@ import * as request from './requester';
 
 const endpoints = {
   allEvents: '/data/events?sortBy=_createdOn%20asc',
+  eventsByCategory: (eventCategory) =>
+    `/data/events?where=category%20IN%20%28%22${eventCategory}%22%29`,
   byId: '/data/events/',
   addEvent: '/data/events',
 };
@@ -12,6 +14,14 @@ export const getAll = async () => {
 
   return events;
 };
+
+export const getAllByCategory = async (eventCategory) => {
+  const encodedCategory = encodeURIComponent(eventCategory);
+  const result = await request.get(endpoints.eventsByCategory(eventCategory));
+  const events = Object.values(result);
+  
+  return events;
+}
 
 export const getById = async (eventId) => {
   return await request.get(endpoints.byId + eventId);
@@ -27,4 +37,4 @@ export const deleteById = async (eventId) => {
 
 export const edit = async (eventId, data) => {
   return await request.put(endpoints.byId + eventId, data);
-}
+};
