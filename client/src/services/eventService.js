@@ -1,7 +1,7 @@
 import * as request from './requester';
 
 const endpoints = {
-  allEvents: '/data/events?sortBy=_createdOn%20asc',
+  allEvents: '/data/events?sortBy=_createdOn%20desc',
   eventsByCategory: (eventCategory) =>
     `/data/events?where=category%20IN%20%28%22${eventCategory}%22%29`,
   byId: '/data/events/',
@@ -16,7 +16,7 @@ export const getAll = async () => {
 };
 
 export const getAllByCategory = async (eventCategory) => {
-  const encodedCategory = encodeURIComponent(eventCategory);
+  
   const result = await request.get(endpoints.eventsByCategory(eventCategory));
   const events = Object.values(result);
   

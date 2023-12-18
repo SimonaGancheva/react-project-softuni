@@ -5,7 +5,7 @@ import { EventContext } from '../../contexts/EventContext';
 import styles from './Catalog.module.css';
 
 export const Catalog = () => {
-  const { events, onCategoryClick } = useContext(EventContext);
+  const { events } = useContext(EventContext);
   const [selectedCategory, setSelectedCategory] = useState('');
   const [filteredEvents, setFilteredEvents] = useState([]);
 

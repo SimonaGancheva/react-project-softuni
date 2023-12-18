@@ -16,15 +16,10 @@ export const AuthProvider = ({ children }) => {
     if (email === '' || password === '') {
       return alert('All fields are required!');
     }
-    let result;
-    try {
-       result = await authService.login(email, password);
-    } catch (error) {
-      console.log(error.message);
-      setUser({});
-      clearUserData();
-      return;
-    }
+    
+    
+     const result = await authService.login(email, password);
+    
     try {
       setUser(result);
       navigate('/');

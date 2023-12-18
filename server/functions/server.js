@@ -1321,10 +1321,12 @@
     var protectedData = {
         users: {
             "35c62d76-8152-4626-8712-eeb96381bea8": {
+                username: "Peter",
                 email: "peter@abv.bg",
                 hashedPassword: "83313014ed3e2391aa1332615d2f053cf5c1bfe05ca1cbcb5582443822df6eb1"
             },
             "847ec027-f659-4086-8032-5173e2f9c93a": {
+                username: "John",
                 email: "john@abv.bg",
                 hashedPassword: "83313014ed3e2391aa1332615d2f053cf5c1bfe05ca1cbcb5582443822df6eb1"
             }
@@ -1369,7 +1371,31 @@
                 "_id": "7353f353-e5eb-4137-8b10-bfb649ebf376",
                 "_ownerId": "35c62d76-8152-4626-8712-eeb96381bea8",
                 "_createdOn": 1702045739615
-              }
+              },
+              "6c880da9-488a-4449-b95e-ff3b133910f5": {
+                "_ownerId": "847ec027-f659-4086-8032-5173e2f9c93a",
+                "title": "Abstract Art",
+                "category": "Art",
+                "site": "Sofia",
+                "imageUrl": "https://www.singulart.com/images/artworks/v2/cropped/14479/main/zoom/545247_b166c8b9a541807880ed4e714a7335f0.jpeg",
+                "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque sit amet eleifend leo. Cras viverra interdum libero, maximus ultrices turpis suscipit quis. Fusce posuere in justo eu venenatis. Nulla luctus turpis in sapien pharetra viverra. Sed non nunc feugiat, sollicitudin nisi et, molestie dolor. Ut vel fringilla quam. Quisque quis hendrerit odio, et mattis ex.\n\nEtiam finibus accumsan lacus sit amet lobortis. Fusce tincidunt elit ut odio consectetur finibus. Phasellus fermentum rhoncus mollis. Mauris tempor et diam nec feugiat. Vivamus et massa quis odio tristique interdum. Vestibulum tempus in risus sed malesuada. Sed a elit sit amet justo suscipit blandit. Vestibulum nec tincidunt lorem. Vestibulum commodo aliquet purus ut aliquam.",
+                "date": "2023-12-30",
+                "maxGuests": "4",
+                "_createdOn": 1702928983008,
+                "_id": "6c880da9-488a-4449-b95e-ff3b133910f5"
+            },
+            "28d45587-077f-46bd-9354-50de23ed51ee": {
+                "_ownerId": "847ec027-f659-4086-8032-5173e2f9c93a",
+                "title": "Yoga For Beginners",
+                "category": "Entertainment",
+                "site": "Plovdiv",
+                "imageUrl": "https://images.everydayhealth.com/images/healthy-living/fitness/all-about-yoga-mega-722x406.jpg",
+                "summary": "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Donec vestibulum ipsum mi, quis pulvinar ante ornare eget. Maecenas tincidunt rhoncus nisl, et lobortis enim ullamcorper in. Nullam urna ipsum, ultrices vitae turpis tristique, pellentesque mattis sapien. Donec ac tempus mi, ut cursus erat. Nunc molestie rutrum massa, vel ultricies ex porttitor eu. Etiam nec commodo ipsum. Proin urna dolor, pretium et aliquam et, porta non ex. Vivamus in mattis nunc. Duis in finibus justo.",
+                "date": "2024-01-05",
+                "maxGuests": "20",
+                "_createdOn": 1702929051549,
+                "_id": "28d45587-077f-46bd-9354-50de23ed51ee"
+            }
         },
         going: {
         
