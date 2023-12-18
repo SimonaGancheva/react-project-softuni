@@ -12,46 +12,47 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useLocalStorage({});
 
   const onLoginSubmit = async (data) => {
+    let newUser = {};
     const { email, password } = data;
     if (email === '' || password === '') {
       return alert('All fields are required!');
     }
-    
-    
-     const result = await authService.login(email, password);
-    
+
     try {
-      setUser(result);
-      navigate('/');
-    } catch (error) {
-      console.log(error.message);
+      newUser = await authService.login(email, password);
+    } catch (err) {
+      return alert(err.message);
     }
+
+    setUser(newUser);
+    navigate('/');
   };
 
   const onRegisterSubmit = async (data) => {
+    let newUser = {};
     const { username, email, password, repass } = data;
-    if (email === '' || password === '' || username === '') {
-      return alert('All fields are required!');
-    }
-    if (repass !== password) {
-      return alert("Passwords don't match!");
-    }
-    const result = await authService.register(username, email, password);
     try {
-      setUser(result);
-      navigate('/');
-    } catch (error) {
-      console.log(error.message);
+      if (email === '' || password === '' || username === '') {
+        return alert('All fields are required!');
+      }
+      if (repass !== password) {
+        return alert("Passwords don't match!");
+      }
+      newUser = await authService.register(username, email, password);
+    } catch (err) {
+      return alert(err.message);
     }
+
+    setUser(newUser);
+    navigate('/');
   };
 
-  const onLogout =  () => {
+  const onLogout = () => {
     // await authService.logout()
     setUser({});
     clearUserData();
   };
 
-  
   const isAuthenticated = !!user.accessToken;
 
   const contextData = {
