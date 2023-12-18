@@ -1,6 +1,6 @@
 import { clearUserData, getUserData } from '../utils/util';
 
-const host = 'http://localhost:3030';
+const host = process.env.REACT_APP_API_URL;
 
 const request = async (method, url, data) => {
   const options = {
