@@ -9,6 +9,7 @@ This part of the application is designed for non-registered users. These users h
 - Guests Home Page -> Lastest events submitted.
 - Browse Events -> View all events.
 - Event Details -> View specific event's details page.
+- Contacts Page -> View contact form and location with connected Google Maps
 - Register -> with unique username, email and password.
 - Login -> with email and password.
 
