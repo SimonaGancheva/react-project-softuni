@@ -130,16 +130,19 @@ export const EditEvent = () => {
                           id="art"
                           value="Art"
                           onChange={onChangeHandler}
-                          checked={values.category === 'Art and Culture'}
+                          checked={values.category === 'Art'}
                         />
                         <label
                           className="form-check-label"
                           htmlFor="art"
                         >
-                          Art and Culture
+                          Art
                         </label>
                       </div>
                      </div>
+
+                     
+                     
 
                       
                     </div>
